@@ -137,10 +137,63 @@
   @media print {
     body { background: #fff; padding: 10px; }
     .section { box-shadow: none; border: 1px solid #ccc; }
+    .edit-fab, .edit-bar { display: none !important; }
   }
+
+  /* ── 편집 버튼 ── */
+  .edit-fab {
+    position: fixed; right: 28px; bottom: 28px; z-index: 999;
+    background: #2B3A5C; color: #fff; padding: 14px 22px;
+    border-radius: 30px; font-size: 13px; font-weight: bold;
+    text-decoration: none; letter-spacing: -0.3px;
+    box-shadow: 0 6px 20px rgba(43,58,92,0.35);
+    display: flex; align-items: center; gap: 8px;
+    transition: all 0.2s;
+  }
+  .edit-fab:hover { background: #E2703A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(226,112,58,0.4); }
+  .edit-fab .icon { font-size: 16px; }
+
+  .edit-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 998;
+    background: linear-gradient(90deg, #2B3A5C, #3D4F72);
+    color: #fff; padding: 8px 20px; font-size: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .edit-bar .left { display: flex; align-items: center; gap: 14px; }
+  .edit-bar .tag { background: #E2703A; padding: 2px 9px; border-radius: 10px; font-weight: bold; font-size: 11px; }
+  .edit-bar .right { display: flex; gap: 8px; }
+  .edit-bar a {
+    color: #fff; text-decoration: none;
+    background: rgba(255,255,255,0.15); padding: 4px 12px;
+    border-radius: 6px; font-size: 11.5px; font-weight: bold;
+    transition: background 0.15s;
+  }
+  .edit-bar a:hover { background: rgba(255,255,255,0.28); }
+  body { padding-top: 50px !important; }
 </style>
 </head>
 <body>
+
+<!-- 상단 편집 바 -->
+<div class="edit-bar">
+  <div class="left">
+    <span class="tag">EDITABLE</span>
+    <span>쥬얼아이스 마케팅팀 &middot; 박명훈 온보딩 문서</span>
+  </div>
+  <div class="right">
+    <a href="https://github.com/charlesmaster911/jewelice-onboarding/edit/main/index.html" target="_blank">✏️ 편집</a>
+    <a href="https://github.com/charlesmaster911/jewelice-onboarding/commits/main/index.html" target="_blank">📜 수정 이력</a>
+    <a href="https://github.com/charlesmaster911/jewelice-onboarding/issues/new?title=내용+수정+제안&body=어떤+내용을+수정할까요?" target="_blank">💬 수정 제안</a>
+  </div>
+</div>
+
+<!-- 플로팅 편집 버튼 -->
+<a href="https://github.com/charlesmaster911/jewelice-onboarding/edit/main/index.html" target="_blank" class="edit-fab">
+  <span class="icon">✏️</span>
+  <span>이 페이지 편집하기</span>
+</a>
+
 <div class="wrapper">
 
 <!-- ══ Title ══ -->
