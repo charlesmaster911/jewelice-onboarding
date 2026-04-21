@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쥬얼아이스 AMD 온보딩</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Malgun Gothic', '맑은 고딕', -apple-system, sans-serif;
+    background: #F7F5FA; color: #1F2937; line-height: 1.6; font-size: 13.5px;
+    padding: 20px; min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .hero {
+    background: linear-gradient(135deg, #5E3E9F 0%, #8B5CF6 50%, #C084FC 100%);
+    color: white; padding: 48px 40px 40px; position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px; background: #FBBF24; border-radius: 50%; opacity: 0.2;
+  }
+  .hero-badge {
+    display: inline-block; background: #FBBF24; color: #2D1A6E;
+    padding: 6px 14px; border-radius: 999px; font-size: 11.5px; font-weight: 800;
+    margin-bottom: 14px; letter-spacing: 0.5px;
+  }
+  .hero h1 { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; position: relative; }
+  .hero-sub { font-size: 14px; opacity: 0.95; margin-bottom: 4px; position: relative; }
+  .hero-meta { font-size: 11.5px; opacity: 0.8; margin-top: 14px; position: relative; }
+
+  .section { padding: 28px 40px; border-bottom: 1px solid #E5E7EB; }
+  .section:last-child { border-bottom: none; }
+  .section-title {
+    font-size: 17px; font-weight: 800; color: #5E3E9F;
+    margin-bottom: 14px; padding-left: 12px; border-left: 5px solid #FBBF24;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title .tag {
+    background: #5E3E9F; color: white; padding: 2px 8px; border-radius: 4px;
+    font-size: 10px; font-weight: 800;
+  }
+
+  .welcome-box {
+    padding: 18px 22px; background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+    border-left: 5px solid #F59E0B; border-radius: 8px;
+    margin-bottom: 14px; font-size: 13px; line-height: 1.8;
+  }
+  .welcome-box strong { color: #92400E; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; background: white; border-radius: 8px; overflow: hidden; }
+  th { background: #5E3E9F; color: white; padding: 10px 12px; text-align: left; font-size: 11.5px; font-weight: 800; }
+  td { padding: 9px 12px; border-bottom: 1px solid #E5E7EB; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #F5F3FF; }
+  td.center { text-align: center; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+  .card {
+    background: #F9FAFB; border-radius: 10px; padding: 16px 18px;
+    border-left: 4px solid #8B5CF6;
+  }
+  .card h3 { font-size: 13px; color: #5E3E9F; margin-bottom: 8px; font-weight: 800; }
+  .card p { font-size: 12px; color: #4B5563; line-height: 1.7; }
+  .card.y { border-left-color: #FBBF24; }
+  .card.y h3 { color: #D97706; }
+  .card.g { border-left-color: #10B981; }
+  .card.g h3 { color: #047857; }
+
+  .badge {
+    display: inline-block; padding: 2px 7px; border-radius: 4px;
+    font-size: 10.5px; font-weight: 800; white-space: nowrap;
+  }
+  .badge-a { background: #FEE2E2; color: #B91C1C; }
+  .badge-b { background: #DBEAFE; color: #1E40AF; }
+  .badge-pending { background: #F3F4F6; color: #6B7280; }
+  .badge-p { background: #EDE9FE; color: #5E3E9F; }
+  .badge-y { background: #FEF3C7; color: #92400E; }
+  .badge-g { background: #D1FAE5; color: #047857; }
+
+  .link-card {
+    display: block; padding: 14px 18px; background: #F5F3FF;
+    border: 1px solid #DDD6FE; border-radius: 8px; text-decoration: none;
+    color: #5E3E9F; margin-bottom: 8px; transition: all 0.15s;
+  }
+  .link-card:hover { background: #EDE9FE; transform: translateX(3px); }
+  .link-card .lc-title { font-weight: 700; font-size: 13px; }
+  .link-card .lc-desc { font-size: 11px; color: #6B7280; margin-top: 3px; }
+
+  .flow {
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+    padding: 14px 18px; background: #F5F3FF; border-radius: 10px; margin-top: 10px;
+  }
+  .flow-step {
+    background: white; padding: 8px 14px; border-radius: 6px; font-weight: 700;
+    font-size: 12px; border: 2px solid #8B5CF6; color: #5E3E9F;
+  }
+  .flow-arrow { color: #8B5CF6; font-weight: 800; }
+
+  .footer {
+    background: #1F2937; color: white; padding: 24px 40px;
+    font-size: 11.5px; text-align: center; line-height: 1.8;
+  }
+  .footer strong { color: #FBBF24; }
+  .footer a { color: #FBBF24; text-decoration: none; }
+
+  ul { padding-left: 20px; font-size: 12.5px; color: #4B5563; line-height: 1.9; }
+  ul li { margin-bottom: 3px; }
+  ul li strong { color: #1F2937; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-badge">🎓 쥬얼아이스 AMD 온보딩</span>
+  <h1>AMD (Assistant MD) 담당 전달 내용</h1>
+  <p class="hero-sub">쥬얼아이스 · (주)마스터마인딩그룹 · 상품 운영 지원 직무</p>
+  <div class="hero-meta">작성: 쥬얼아이스 · 2026.04.21 · 담당자 입사 시 전달용</div>
+</div>
+
+<!-- 1. 환영 및 직무 개요 -->
+<div class="section">
+  <div class="section-title">👋 1. 환영 인사 및 직무 정의 <span class="tag">INTRO</span></div>
+
+  <div class="welcome-box">
+    안녕하세요, <strong>쥬얼아이스 AMD</strong>로 합류해주셔서 감사합니다.<br>
+    <strong>AMD (Assistant MD · 운영 지원)</strong> 직무는 쥬얼아이스의 상품 운영 · 채널 관리 · 재고/판매 데이터를 뒷받침하는 <strong>핵심 지원 포지션</strong>입니다. 본 문서는 입사 첫 주 필독 자료입니다.
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>📋 담당 업무 (5가지)</h3>
+      <ul>
+        <li><strong>상품 등록 및 운영 관리</strong> — 사방넷 중심</li>
+        <li><strong>판매채널별 프로모션 운영 지원</strong></li>
+        <li><strong>재고 및 판매 데이터 정리</strong></li>
+        <li><strong>상세페이지 및 콘텐츠 협업</strong></li>
+        <li><strong>MD 업무 전반 지원</strong></li>
+      </ul>
+    </div>
+    <div class="card y">
+      <h3>🎯 자격/우대 사항</h3>
+      <ul>
+        <li>꼼꼼한 업무처리 능력</li>
+        <li>온라인커머스에 대한 이해</li>
+        <li>원활한 커뮤니케이션 능력</li>
+        <li><strong>우대:</strong> 이커머스 운영 경험, 스마트스토어/자사몰/종합몰 경험, 엑셀, AMD/MD 실무 경험자</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 보고 라인 및 조직 -->
+<div class="section">
+  <div class="section-title">🏢 2. 보고 라인 및 협업 조직 <span class="tag">ORG</span></div>
+
+  <div class="flow">
+    <div class="flow-step">AMD</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">MD 운영팀</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">사업본부 (쥬얼아이스)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">대표</div>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>부서/직책</th><th>주요 담당</th><th>협업 포인트</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>사업본부 / 팀장</strong></td><td>사업 총괄 운영 관리</td><td>주요 의사결정 · 가격정책 · 프로모션 승인</td></tr>
+      <tr><td><strong>경영관리/SCM · 차장</strong></td><td>SCM · 회계 · 세무</td><td>재고 수치 교차 확인 · 발주 내역</td></tr>
+      <tr><td><strong>MD 운영팀 · 과장 (직속)</strong></td><td>MD 운영 총괄 · 상품 가격</td><td><strong>AMD 직속 상급자 · 일일 보고</strong></td></tr>
+      <tr><td><strong>콘텐츠 광고팀 · 대리</strong></td><td>광고 운영 · 콘텐츠</td><td>상세페이지 협업 · 소재 요청</td></tr>
+      <tr><td><strong>고객지원팀</strong></td><td>CS · 반품/교환</td><td>고객 문의 상품 정보 확인</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 3. 판매 채널 현황 -->
+<div class="section">
+  <div class="section-title">🛒 3. 판매 채널 현황 — 총 21개 운영 + 확장 <span class="tag">CHANNEL</span></div>
+
+  <p style="font-size:12px;color:#6B7280;margin-bottom:12px;">
+    운영 단계: <strong>채널 확대 → DB·등급 정리 → 집중 운영</strong> 전환 중<br>
+    기존 21개몰(낮은 수수료, 기반 유지) + 신규 16개몰(확장 채널 / 종합몰·라이브·B2B) = <strong>총 37개 채널</strong>
+  </p>
+
+  <table>
+    <thead>
+      <tr><th style="width:8%">등급</th><th style="width:15%">구분</th><th>채널</th><th style="width:10%">수수료</th><th>특이사항</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="badge badge-a">A</span></td><td>자사몰</td><td>카페24</td><td>-</td><td>행사 5%</td></tr>
+      <tr><td><span class="badge badge-a">A</span></td><td>자사몰</td><td>네이버 스마트스토어</td><td>2%</td><td>행사 5%</td></tr>
+      <tr><td><span class="badge badge-a">A</span></td><td>자사몰</td><td>네이버페이</td><td>2%</td><td>행사 5%</td></tr>
+      <tr><td><span class="badge badge-a">A</span></td><td>오픈마켓</td><td>카카오 파트너센터/페이</td><td>3.3%+</td><td>톡딜 10%</td></tr>
+      <tr><td><span class="badge badge-a">A</span></td><td>오픈마켓</td><td>카카오 선물하기 / 톡스토어</td><td>3.3%+</td><td>-</td></tr>
+      <tr><td><span class="badge badge-a">A</span></td><td>오픈마켓</td><td>와디즈</td><td>3.3%+</td><td>프로젝트 #336790 · 4/23 오픈</td></tr>
+      <tr><td><span class="badge badge-a">A</span></td><td>오픈마켓</td><td>쿠팡 (한반도키친/씨앤에프)</td><td>35%</td><td>메인 계정</td></tr>
+      <tr><td><span class="badge badge-b">B</span></td><td>종합몰</td><td>SSG / 롯데ON</td><td>15%</td><td>행사 15%</td></tr>
+      <tr><td><span class="badge badge-b">B</span></td><td>오픈마켓</td><td>이베이 (지마켓·옥션)</td><td>13%</td><td>마스터 계정</td></tr>
+      <tr><td><span class="badge badge-b">B</span></td><td>오픈마켓</td><td>11번가</td><td>13%</td><td>-</td></tr>
+      <tr><td><span class="badge badge-b">B</span></td><td>전문몰</td><td>오아시스 / 오늘의집</td><td>8%</td><td>-</td></tr>
+      <tr><td><span class="badge badge-b">B</span></td><td>전문몰</td><td>토스 / 유튜브쇼핑</td><td>-</td><td>-</td></tr>
+      <tr><td><span class="badge badge-b">B</span></td><td>기타</td><td>올웨이즈 / 고려기프트(판촉)</td><td>-</td><td>-</td></tr>
+      <tr><td><span class="badge badge-pending">입점 신청</span></td><td>전문몰/종합몰</td><td>마켓컬리 · GS</td><td>30%</td><td>진행 중</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 4. 사방넷 (핵심 도구) -->
+<div class="section">
+  <div class="section-title">⚙️ 4. 사방넷 — AMD 최핵심 도구 <span class="tag">TOOL</span></div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>📦 사방넷이란?</h3>
+      <p>다채널 상품 관리 통합 플랫폼. 한 번 등록하면 21개 이상 쇼핑몰에 동시 전송. <strong>AMD가 매일 사용하는 주 도구.</strong></p>
+    </div>
+    <div class="card y">
+      <h3>✅ 현재 상태</h3>
+      <p><strong>21개 상품 등록 완료</strong> (아블러 · 듀오메이커 · 아블러제로 · 세트 · 몰드 · 악세사리)<br>기본정보 · 부가정보 · 카테고리 · 연동 · 전송까지 세팅 완료</p>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;">
+    <a href="https://drive.google.com/drive/folders/1aGWSz6qc6UDZ8l5ItXXCEpvCe3PGAJb0" class="link-card" target="_blank">
+      <div class="lc-title">📂 사방넷 세팅 폴더 (구글 드라이브)</div>
+      <div class="lc-desc">상품 등록 · 채널 연동 · 속성 특이사항 등 전체 자료</div>
+    </a>
+    <a href="https://drive.google.com/drive/folders/1tuoMTJ6TInyld2al1e6eG-4JSNhfy6f7" class="link-card" target="_blank">
+      <div class="lc-title">📂 03.사방넷 폴더 (아카이브)</div>
+      <div class="lc-desc">과거 운영 기록 · 히스토리</div>
+    </a>
+    <a href="https://drive.google.com/file/d/1Z0mi2HYUOWXs8ROZsJsyCRNvi4vUZRjn/view" class="link-card" target="_blank">
+      <div class="lc-title">📊 쇼핑몰상품등록_다운로드(사방넷).xlsx</div>
+      <div class="lc-desc">21개 상품 전체 목록 · 판매가·원가·이익률·옵션·재고</div>
+    </a>
+    <a href="https://drive.google.com/file/d/13T3fRYbo8dsPXmyvpFkCsrIwl3n0lT7Q/view" class="link-card" target="_blank">
+      <div class="lc-title">📊 사방넷상품조회수정_다운로드.xlsx</div>
+      <div class="lc-desc">SKU별 원가 · 매입처 · 제조사 · 상품 상태</div>
+    </a>
+    <a href="https://drive.google.com/file/d/1tbbt6MgW3fK1aXeSbR5EAJ0qJIF1hOlf/view" class="link-card" target="_blank">
+      <div class="lc-title">📊 사방넷상품조회수정_속성특이사항.xlsx</div>
+      <div class="lc-desc">쇼핑몰별 정보고시 입력 규칙 (ESM·11번가·스마트스토어·쿠팡 등 50개+)</div>
+    </a>
+  </div>
+</div>
+
+<!-- 5. 상품 라인업 -->
+<div class="section">
+  <div class="section-title">🧊 5. 쥬얼아이스 상품 라인업 (사방넷 등록 기준) <span class="tag">SKU</span></div>
+
+  <table>
+    <thead>
+      <tr><th>No</th><th>상품명</th><th>제조사/매입처</th><th>원산지</th><th class="num">판매가</th><th class="num">원가</th><th class="num">이익률</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">1</td><td><strong>아블러 아이스볼</strong></td><td>성준테크</td><td>대한민국</td><td class="num">69,000</td><td class="num">12,500</td><td class="num"><span class="badge badge-g">81.9%</span></td></tr>
+      <tr><td class="num">2</td><td><strong>아블러 스피어다이아</strong></td><td>성준테크</td><td>대한민국</td><td class="num">69,000</td><td class="num">12,500</td><td class="num"><span class="badge badge-g">81.9%</span></td></tr>
+      <tr><td class="num">3</td><td><strong>아블러 큐브</strong></td><td>성준테크</td><td>대한민국</td><td class="num">69,000</td><td class="num">12,500</td><td class="num"><span class="badge badge-g">81.9%</span></td></tr>
+      <tr><td class="num">4</td><td><strong>듀오메이커 아이스볼</strong></td><td>해피홈</td><td>대한민국</td><td class="num">89,000</td><td class="num">13,600</td><td class="num"><span class="badge badge-g">84.7%</span></td></tr>
+      <tr><td class="num">5</td><td><strong>듀오메이커 스틱</strong></td><td>해피홈</td><td>대한민국</td><td class="num">89,000</td><td class="num">13,600</td><td class="num"><span class="badge badge-g">84.7%</span></td></tr>
+      <tr><td class="num">6</td><td><strong>아블러제로</strong></td><td>Shanghai ForeverGold</td><td>중국</td><td class="num">49,000</td><td class="num">6,259</td><td class="num"><span class="badge badge-g">87.2%</span></td></tr>
+      <tr><td class="num">7</td><td><strong>아블러 (세트)</strong></td><td>성준테크</td><td>대한민국</td><td class="num">69,000</td><td class="num">12,500</td><td class="num"><span class="badge badge-g">81.9%</span></td></tr>
+      <tr><td class="num">8</td><td><strong>듀오메이커 (세트)</strong></td><td>해피홈</td><td>대한민국</td><td class="num">89,000</td><td class="num">13,600</td><td class="num"><span class="badge badge-g">84.7%</span></td></tr>
+      <tr><td class="num">9</td><td><strong>듀오메이커 더블세트</strong></td><td>해피홈</td><td>대한민국</td><td class="num">197,000</td><td class="num">27,200</td><td class="num"><span class="badge badge-g">86.2%</span></td></tr>
+      <tr><td class="num">10</td><td><strong>아블러제로 더블세트</strong></td><td>Shanghai ForeverGold</td><td>중국</td><td class="num">98,000</td><td class="num">12,518</td><td class="num"><span class="badge badge-g">87.2%</span></td></tr>
+      <tr><td class="num">11</td><td><strong>아블러 더블세트</strong></td><td>성준테크</td><td>대한민국</td><td class="num">138,000</td><td class="num">25,000</td><td class="num"><span class="badge badge-g">81.9%</span></td></tr>
+      <tr><td class="num">12</td><td><strong>아블러 + 추가몰드</strong></td><td>성준테크</td><td>대한민국</td><td class="num">108,000</td><td class="num">19,818</td><td class="num"><span class="badge badge-g">81.7%</span></td></tr>
+      <tr><td class="num">13</td><td><strong>듀오메이커 + 추가몰드</strong></td><td>해피홈</td><td>대한민국</td><td class="num">158,000</td><td class="num">18,600</td><td class="num"><span class="badge badge-g">88.2%</span></td></tr>
+      <tr><td class="num">14</td><td>아블러 텀블러 (몰드 제외)</td><td>중국 GreenHome</td><td>중국</td><td class="num">25,000</td><td class="num">4,384</td><td class="num">82.5%</td></tr>
+      <tr><td class="num">15</td><td>아블러 전용몰드 (텀블러제외)</td><td>성준테크</td><td>대한민국</td><td class="num">29,000</td><td class="num">7,318</td><td class="num">74.8%</td></tr>
+      <tr><td class="num">16</td><td>얼음 보관통+집게 세트</td><td>프라피아</td><td>대한민국</td><td class="num">12,000</td><td class="num">4,000</td><td class="num">66.7%</td></tr>
+      <tr><td class="num">17</td><td>이글 집게</td><td>광저우 매직메탈</td><td>중국</td><td class="num">20,000</td><td class="num">8,500</td><td class="num"><span class="badge badge-y">57.5%</span></td></tr>
+      <tr><td class="num">18</td><td>지거 30/45ml</td><td>광저우 매직메탈</td><td>중국</td><td class="num">15,000</td><td class="num">6,500</td><td class="num"><span class="badge badge-y">56.7%</span></td></tr>
+      <tr><td class="num">19</td><td>스틱보관통 (듀오메이커 전용)</td><td>세기프라텍</td><td>대한민국</td><td class="num">10,000</td><td class="num">1,900</td><td class="num"><span class="badge badge-g">81.0%</span></td></tr>
+      <tr><td class="num">20</td><td>온더락 유리잔</td><td>MARKET UNION</td><td>중국</td><td class="num">9,000</td><td class="num">3,360</td><td class="num"><span class="badge badge-y">62.7%</span></td></tr>
+      <tr><td class="num">21</td><td>하이볼 유리잔</td><td>MARKET UNION</td><td>중국</td><td class="num">9,000</td><td class="num">2,660</td><td class="num"><span class="badge badge-g">70.4%</span></td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:12px;padding:10px 14px;background:#FEF3C7;border-radius:6px;font-size:11.5px;color:#92400E;">
+    ⚠️ <strong>마진 60% 미만 SKU 주의:</strong> 지거(56.7%), 이글 집게(57.5%), 온더락 유리잔(62.7%) → SKU 정리 검토 대상
+  </div>
+</div>
+
+<!-- 6. 주요 파트너사 -->
+<div class="section">
+  <div class="section-title">🤝 6. 주요 제조사/파트너 <span class="tag">VENDOR</span></div>
+
+  <table>
+    <thead>
+      <tr><th>제조사/거래처</th><th>주요 제품</th><th>국가</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>성준테크</strong></td><td>아블러 몰드 (볼/큐브/스피어) · 아블러 세트</td><td>🇰🇷 대한민국</td><td>핵심 제조사 (메인라인)</td></tr>
+      <tr><td><strong>해피홈</strong></td><td>듀오메이커 본체/몰드/외통 · 듀오메이커 세트</td><td>🇰🇷 대한민국</td><td>핵심 제조사 (메인라인)</td></tr>
+      <tr><td><strong>Shanghai ForeverGold</strong></td><td>아블러제로 (텀블러)</td><td>🇨🇳 중국</td><td>사입 · 중국 발주</td></tr>
+      <tr><td><strong>Zhejiang GreenHome</strong></td><td>아블러 텀블러</td><td>🇨🇳 중국</td><td>제조 · 중국 발주</td></tr>
+      <tr><td>Guangzhou Magic Metal</td><td>이글 집게 · 지거</td><td>🇨🇳 중국</td><td>악세사리</td></tr>
+      <tr><td>프라피아 / 세기프라텍</td><td>얼음 보관통</td><td>🇰🇷 대한민국</td><td>부속</td></tr>
+      <tr><td>MARKET UNION</td><td>온더락/하이볼 유리잔</td><td>🇨🇳 중국</td><td>부속</td></tr>
+      <tr><td>삼성피아이티</td><td>실링스티커 · 제품메뉴얼</td><td>🇰🇷 대한민국</td><td>부자재</td></tr>
+      <tr><td>태양케미컬</td><td>EPP (듀오메이커)</td><td>🇰🇷 대한민국</td><td>부자재</td></tr>
+      <tr><td>제오닉</td><td>보관통+집게 세트 · 얼음집게</td><td>🇰🇷 대한민국</td><td>악세사리</td></tr>
+      <tr><td>보명씨앤아이 / 박스몰</td><td>컬러박스 · 제품박스 · PE봉투</td><td>🇰🇷 대한민국</td><td>패키지</td></tr>
+      <tr><td>피플스토리</td><td>3PL (출고/반품 물류)</td><td>🇰🇷 대한민국</td><td>양주 화합로 · CJ대한통운</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 7. 핵심 운영 자료 -->
+<div class="section">
+  <div class="section-title">📚 7. 핵심 운영 자료 링크 <span class="tag">DOCS</span></div>
+
+  <a href="https://drive.google.com/file/d/1jGCzVZG8ptGl1J_byXOTqfbCxCYC4s7G/view" class="link-card" target="_blank">
+    <div class="lc-title">📊 마스터마인딩그룹 내부 계정관리 (37개 채널 전체)</div>
+    <div class="lc-desc">채널별 ID/PW · 수수료 · URL · 입점/계약/세팅 상태 · 담당자 컨택</div>
+  </a>
+
+  <a href="https://drive.google.com/file/d/1gp8AcXfduvd-uwHHWiO2qJ0dgloScBcE/view" class="link-card" target="_blank">
+    <div class="lc-title">📊 최종 계정관리_202604 (최신 버전)</div>
+    <div class="lc-desc">4월 업데이트 · 잔디 공유 필수</div>
+  </a>
+
+  <a href="https://drive.google.com/file/d/1fhs-yPrIN-WzoCvUzK5qekx0gVGN3Yvp/view" class="link-card" target="_blank">
+    <div class="lc-title">📊 2026년 3월 리뷰 및 추진과제</div>
+    <div class="lc-desc">채널 운영 · 광고 · 가격 인상 · 자사몰 리뉴얼 · 유튜브 쇼핑 · 업무분장 종합</div>
+  </a>
+
+  <a href="https://charlesmaster911.github.io/jewelice-playbook/jihyun-inventory.html" class="link-card" target="_blank">
+    <div class="lc-title">📦 재고·발주 통합 분석</div>
+    <div class="lc-desc">70 SKU 전체 · 긴급발주 · 와디즈 연동 · 공구 · 크로스체크</div>
+  </a>
+
+  <a href="https://charlesmaster911.github.io/jewelice-playbook/jihyun-wadiz.html" class="link-card" target="_blank">
+    <div class="lc-title">🎯 와디즈 운영 현황 (내부)</div>
+    <div class="lc-desc">1차 가용재고 · 미디어믹스 광고 · 이벤트 3종 · 리워드 7종</div>
+  </a>
+</div>
+
+<!-- 8. 사업자 정보 및 출고지 -->
+<div class="section">
+  <div class="section-title">🏛️ 8. 사업자 정보 · 출고지 <span class="tag">INFO</span></div>
+
+  <table>
+    <thead>
+      <tr><th>구분</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>회사명</strong></td><td>(주)마스터마인딩그룹 · 브랜드: 쥬얼아이스</td></tr>
+      <tr><td><strong>사업자등록번호</strong></td><td>426-87-00479 (법인) · 620-38-00938 (씨앤에프 트레이딩)</td></tr>
+      <tr><td><strong>통신판매업번호</strong></td><td>제 2023-성남중원-0086호</td></tr>
+      <tr><td><strong>대표번호</strong></td><td>070-7152-0340</td></tr>
+      <tr><td><strong>회사 메일</strong></td><td>jewelice@jewelice.kr</td></tr>
+      <tr><td><strong>본사 주소</strong></td><td>경기도 성남시 중원구 둔촌대로 388번길 24, 13층 1305A호 (상대원동, 성남 우림라이온스밸리 3차)</td></tr>
+      <tr><td><strong>출고지/반품지</strong></td><td>경기도 양주시 은현면 화합로1169번길 72-54 (피플스토리 3PL)</td></tr>
+      <tr><td><strong>택배사</strong></td><td>CJ대한통운 (일반)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 9. 첫 주 온보딩 체크리스트 -->
+<div class="section">
+  <div class="section-title">✅ 9. 첫 주 온보딩 체크리스트 <span class="tag">WEEK-1</span></div>
+
+  <table>
+    <thead>
+      <tr><th style="width:12%">Day</th><th>할 일</th><th style="width:15%">담당</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Day 1</strong></td><td>환영 미팅 · 본 문서 정독 · 사방넷·잔디·구글드라이브 계정 권한 발급</td><td>MD 운영팀</td></tr>
+      <tr><td><strong>Day 2</strong></td><td>사방넷 21개 상품 전체 파악 · 쇼핑몰상품등록 엑셀 숙지 · 채널별 특이사항 파악</td><td>AMD</td></tr>
+      <tr><td><strong>Day 3</strong></td><td>37개 채널 계정관리 엑셀 확인 · A등급 7개 채널 어드민 접속 테스트</td><td>AMD</td></tr>
+      <tr><td><strong>Day 4</strong></td><td>사방넷 업무 매뉴얼 작성 (자체 메모) · 궁금증 정리 → 운영팀 질의</td><td>AMD</td></tr>
+      <tr><td><strong>Day 5</strong></td><td>첫 주 회고 · 2주차 계획 수립 · 쥬얼아이스 컨펌</td><td>AMD → 팀장</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 10. KPI 및 성과 기준 -->
+<div class="section">
+  <div class="section-title">🎯 10. KPI 및 성과 기준 <span class="tag">KPI</span></div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>📊 분기별 KPI</h3>
+      <ul>
+        <li><strong>신규 SKU 등록 수</strong> (분기별 목표)</li>
+        <li><strong>재고 회전율</strong> 개선</li>
+        <li><strong>파트너사 수</strong> 증가</li>
+        <li><strong>마진 60% 미만 SKU 정리</strong> 개수</li>
+      </ul>
+    </div>
+    <div class="card g">
+      <h3>✨ 업무 품질 기준</h3>
+      <ul>
+        <li>상품 등록 오류 <strong>0건</strong> (월별)</li>
+        <li>채널별 가격 정책 <strong>100% 준수</strong></li>
+        <li>재고 불일치 이슈 <strong>24시간 내 해결</strong></li>
+        <li>사방넷 데이터 <strong>실시간 동기화</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>💎 쥬얼아이스 AMD 온보딩 · 2026-04-21</strong><br>
+  전달: 쥬얼아이스 · 작성: 화경 (AI)<br>
+  🔗 영구 URL: <a href="https://charlesmaster911.github.io/jewelice-onboarding/amd.html">charlesmaster911.github.io/jewelice-onboarding/amd.html</a><br>
+  <small>본 문서는 쥬얼아이스 컨펌 하에 작성되었으며, 실시간 업데이트됩니다.</small>
+</div>
+
+</div>
+
+</body>
+</html>
