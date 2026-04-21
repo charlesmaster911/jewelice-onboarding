@@ -35,11 +35,14 @@
   .section-title {
     font-size: 17px; font-weight: 800; color: #5E3E9F;
     margin-bottom: 14px; padding-left: 12px; border-left: 5px solid #FBBF24;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
   }
   .section-title .tag {
     background: #5E3E9F; color: white; padding: 2px 8px; border-radius: 4px;
     font-size: 10px; font-weight: 800;
+  }
+  .section-sub {
+    font-size: 12px; color: #6B7280; margin-bottom: 12px; line-height: 1.7;
   }
 
   .welcome-box {
@@ -59,16 +62,45 @@
   .alert-box {
     padding: 14px 20px; background: #FEE2E2; border-left: 5px solid #DC2626;
     border-radius: 8px; font-size: 12px; color: #991B1B; line-height: 1.7;
+    margin-top: 12px;
   }
   .alert-box strong { color: #7F1D1D; }
 
-  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; background: white; border-radius: 8px; overflow: hidden; }
+  .info-box {
+    padding: 14px 20px; background: #EDE9FE; border-left: 5px solid #5E3E9F;
+    border-radius: 8px; font-size: 12px; color: #5E3E9F; line-height: 1.7;
+    margin-top: 12px;
+  }
+
+  .hub-head {
+    padding: 14px 20px; border-radius: 8px 8px 0 0; margin-top: 16px;
+    font-weight: 800; font-size: 14px; letter-spacing: -0.3px;
+  }
+  .hub-head .sub { font-size: 11.5px; font-weight: 600; opacity: 0.85; display: block; margin-top: 4px; }
+  .hub-head.purple { background: linear-gradient(135deg, #5E3E9F, #8B5CF6); color: white; }
+  .hub-head.yellow { background: linear-gradient(135deg, #FBBF24, #F59E0B); color: #4B2E00; }
+  .hub-head.orange { background: linear-gradient(135deg, #F97316, #EA580C); color: white; }
+  .hub-head.dark { background: linear-gradient(135deg, #1F2937, #374151); color: #FBBF24; }
+  .hub-head.grey { background: linear-gradient(135deg, #6B7280, #4B5563); color: white; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 0; background: white; border-radius: 0 0 8px 8px; overflow: hidden; }
   th { background: #5E3E9F; color: white; padding: 10px 12px; text-align: left; font-size: 11.5px; font-weight: 800; }
-  td { padding: 9px 12px; border-bottom: 1px solid #E5E7EB; vertical-align: top; }
+  th.yellow { background: #F59E0B; color: #4B2E00; }
+  th.orange { background: #F97316; }
+  th.dark { background: #1F2937; color: #FBBF24; }
+  th.grey { background: #6B7280; }
+  td { padding: 9px 12px; border-bottom: 1px solid #E5E7EB; vertical-align: top; line-height: 1.7; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: #F5F3FF; }
   td.center { text-align: center; }
   td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.label { font-weight: 700; background: #F5F3FF; color: #5E3E9F; white-space: nowrap; width: 18%; }
+  td.label-y { font-weight: 700; background: #FEF3C7; color: #92400E; white-space: nowrap; }
+  td.label-o { font-weight: 700; background: #FFEDD5; color: #9A3412; white-space: nowrap; }
+  td.chk { text-align: center; font-size: 16px; width: 40px; }
+
+  .table-wrap { border-radius: 0 0 8px 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .table-wrap + .hub-head { margin-top: 20px; }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 10px; }
   @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
@@ -81,12 +113,15 @@
   }
   .card h3 { font-size: 13px; color: #5E3E9F; margin-bottom: 8px; font-weight: 800; }
   .card p { font-size: 12px; color: #4B5563; line-height: 1.7; }
-  .card.y { border-left-color: #FBBF24; }
+  .card ul { padding-left: 18px; font-size: 12px; color: #4B5563; line-height: 1.8; }
+  .card.y { border-left-color: #FBBF24; background: #FFFBEB; }
   .card.y h3 { color: #D97706; }
-  .card.g { border-left-color: #10B981; }
+  .card.g { border-left-color: #10B981; background: #ECFDF5; }
   .card.g h3 { color: #047857; }
-  .card.r { border-left-color: #DC2626; }
+  .card.r { border-left-color: #DC2626; background: #FEF2F2; }
   .card.r h3 { color: #B91C1C; }
+  .card.b { border-left-color: #3B82F6; background: #EFF6FF; }
+  .card.b h3 { color: #1E40AF; }
 
   .badge {
     display: inline-block; padding: 2px 7px; border-radius: 4px;
@@ -98,16 +133,17 @@
   .badge-p { background: #EDE9FE; color: #5E3E9F; }
   .badge-y { background: #FEF3C7; color: #92400E; }
   .badge-g { background: #D1FAE5; color: #047857; }
-  .badge-new { background: #FBBF24; color: #2D1A6E; }
+  .badge-r { background: #FEE2E2; color: #B91C1C; }
+  .badge-o { background: #FFEDD5; color: #9A3412; }
 
   .link-card {
-    display: block; padding: 14px 18px; background: #F5F3FF;
+    display: block; padding: 12px 16px; background: #F5F3FF;
     border: 1px solid #DDD6FE; border-radius: 8px; text-decoration: none;
     color: #5E3E9F; margin-bottom: 8px; transition: all 0.15s;
   }
   .link-card:hover { background: #EDE9FE; transform: translateX(3px); }
   .link-card .lc-title { font-weight: 700; font-size: 13px; }
-  .link-card .lc-desc { font-size: 11px; color: #6B7280; margin-top: 3px; }
+  .link-card .lc-desc { font-size: 11px; color: #6B7280; margin-top: 3px; line-height: 1.6; }
 
   .flow {
     display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
@@ -119,19 +155,12 @@
   }
   .flow-arrow { color: #8B5CF6; font-weight: 800; }
 
-  .kpi-big {
-    display: inline-block; background: linear-gradient(135deg, #5E3E9F, #8B5CF6);
-    color: white; padding: 4px 10px; border-radius: 5px; font-weight: 800;
-    font-size: 12px;
-  }
+  a { color: #5E3E9F; text-decoration: none; font-weight: 600; }
+  a:hover { text-decoration: underline; }
 
-  .concept-hero {
-    padding: 20px 24px; background: linear-gradient(135deg, #2D1A6E, #5E3E9F);
-    color: white; border-radius: 10px; text-align: center;
-  }
-  .concept-hero .kr { font-size: 20px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
-  .concept-hero .en { font-size: 14px; opacity: 0.9; font-style: italic; }
-  .concept-hero .meta { font-size: 11px; margin-top: 10px; opacity: 0.75; }
+  ul { padding-left: 20px; font-size: 12.5px; color: #4B5563; line-height: 1.9; }
+  ul li { margin-bottom: 3px; }
+  ul li strong { color: #1F2937; }
 
   .footer {
     background: #1F2937; color: white; padding: 24px 40px;
@@ -140,9 +169,16 @@
   .footer strong { color: #FBBF24; }
   .footer a { color: #FBBF24; text-decoration: none; }
 
-  ul { padding-left: 20px; font-size: 12.5px; color: #4B5563; line-height: 1.9; }
-  ul li { margin-bottom: 3px; }
-  ul li strong { color: #1F2937; }
+  code {
+    background: #F3F4F6; padding: 1px 6px; border-radius: 4px;
+    font-size: 11.5px; color: #5E3E9F; font-family: Consolas, monospace;
+  }
+
+  .ampm-box {
+    margin-top: 16px; padding: 16px 20px; background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+    border-left: 5px solid #F59E0B; border-radius: 8px;
+  }
+  .ampm-box h4 { font-size: 14px; color: #92400E; margin-bottom: 10px; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -153,361 +189,981 @@
 <div class="hero">
   <span class="hero-badge">🎓 쥬얼아이스 콘텐츠 마케터 온보딩</span>
   <h1>콘텐츠 마케터 전달 내용</h1>
-  <p class="hero-sub">쥬얼아이스 · SNS 운영 · 광고 통합 리포트 · 콘텐츠 제작 기획</p>
-  <div class="hero-meta">작성: 쥬얼아이스 · 2026.04.21 · 담당자 입사 시 전달용</div>
+  <p class="hero-sub">쥬얼아이스 · 마케팅팀 · 광고 운영 · 콘텐츠 제작 · 외주 핸들링</p>
+  <div class="hero-meta">전달: 쥬얼아이스 · 작성: 화경 · 2026.04.20 (2026.04.21 업데이트) · 쥬얼아이스 컨펌 하에 작성</div>
 </div>
 
-<!-- 1. 환영 및 직무 개요 -->
+<!-- 0. 환영 및 업무 방향성 -->
 <div class="section">
-  <div class="section-title">👋 1. 환영 인사 및 직무 정의 <span class="tag">INTRO</span></div>
+  <div class="section-title">👋 환영 인사 및 업무 방향성 <span class="tag">INTRO</span></div>
 
   <div class="welcome-box">
     안녕하세요, <strong>쥬얼아이스 콘텐츠 마케터</strong>로 합류해주셔서 감사합니다.<br>
-    <strong>콘텐츠 마케터</strong> 직무는 쥬얼아이스의 <strong>메타 + 네이버 + 쿠팡 통합 광고 리포트 운영</strong>, <strong>유튜브·틱톡·인스타그램 전면 운영 기획</strong>, <strong>3개월 SNS 도달 회복 미션</strong>을 총괄하는 핵심 포지션입니다. 본 문서는 입사 첫 주 필독 자료입니다.
+    본 문서는 입사 첫 주 필독 자료이며, <strong>광고 운영 · 콘텐츠 제작 · 외주 에이전시 핸들링</strong>의 전체 맥락을 담고 있습니다.<br><br>
+    <strong>🎯 콘텐츠 마케터 업무 방향성:</strong> SNS 도달 급락 회복 · 광고 ROAS 3.0+ 유지 · 월 도달 50만 회복 · 외주 에이전시 최종 선정 및 런칭.
   </div>
 
   <div class="mission-box">
-    <strong>🚨 3개월 핵심 미션 — SNS 도달 회복</strong><br>
-    인스타그램 월 도달 <strong>1월 340K → 4월 하루 2.7K</strong>로 급락 상태. 3개월 내 월 도달 <strong>50만 회복</strong>이 1차 목표. <strong>4/24(금) 3개월 상세 계획서 제출 필수.</strong>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <h3>📋 담당 업무 (5가지)</h3>
-      <ul>
-        <li><strong>통합 광고 리포트 운영</strong> — 메타·네이버·쿠팡</li>
-        <li><strong>SNS 전면 운영 기획</strong> — 유튜브·틱톡·인스타</li>
-        <li><strong>콘텐츠 소재 제작 총괄</strong> — 촬영·편집·카피</li>
-        <li><strong>광고 에이전시 비딩/관리</strong> — 6개사 커뮤니케이션</li>
-        <li><strong>브랜드 컨셉 일관성 유지</strong> — 모든 소재·카피 검수</li>
-      </ul>
-    </div>
-    <div class="card y">
-      <h3>🎯 핵심 역량</h3>
-      <ul>
-        <li>퍼포먼스 광고 데이터 해석</li>
-        <li>SNS 플랫폼별 알고리즘 이해</li>
-        <li>영상·이미지 소재 기획 및 디렉팅</li>
-        <li>광고 대행사 관리 커뮤니케이션</li>
-        <li><strong>우대:</strong> 이커머스 브랜드 콘텐츠 실무 경험, 메타·네이버 광고 매니저 경험, 숏폼 편집 경험</li>
-      </ul>
-    </div>
+    <strong>📘 참고 — 쥬얼아이스(팀장) 3개월 추진과제</strong><br>
+    <span style="font-size:11px;color:#92400E;">아래는 <strong>팀장 본인의 3개월 추진과제(2026.03~05)</strong>입니다. 콘텐츠 마케터는 이 내용을 <strong>참고 자료</strong>로 보고, 본인 영역의 실행 계획을 별도로 수립·제안해주세요.</span><br><br>
+    · 1개월차 (3월): 운영 구조 파악 + 사방넷 기준 정리 + 광고 구조 진단<br>
+    · 2개월차 (4월): 조직 재편 + 가격 정책 리셋 + 외주 에이전시 선정 (6곳 비딩)<br>
+    · 3개월차 (5월): 브랜드 업그레이드 + B2B 구조화 + 수익구조 1차 완성<br><br>
+    <strong>📝 콘텐츠 마케터 본인 실행안:</strong> 위 추진과제를 참고하여 <strong>SNS·광고·콘텐츠 영역의 자체 계획</strong>을 수립하여 팀장에게 제안. 팀장의 아이디어·방향성이 수시로 추가될 수 있으므로 본 문서 업데이트 확인 필수.
   </div>
 </div>
 
-<!-- 2. 보고 라인 및 조직 -->
+<!-- ══════════ 입사 즉시 필독 — 원스톱 자료 허브 ══════════ -->
 <div class="section">
-  <div class="section-title">🏢 2. 보고 라인 및 협업 조직 <span class="tag">ORG</span></div>
+  <div class="section-title">🔥 입사 즉시 필독 — 원스톱 자료 허브 <span class="tag">HUB</span></div>
+  <div class="section-sub">
+    회사·컨셉·운영업체·보고체계·광고자산을 한 자리에서. 링크는 바로 클릭해서 열람, 실물 파일은 사내 F드라이브에서 직접 접근.
+  </div>
 
-  <div class="flow">
-    <div class="flow-step">프로그레스미디어 (외주)</div>
+  <!-- ❶ 프로그레스미디어 -->
+  <div class="hub-head orange">
+    ❶ 현재 운영 중인 네이버 광고 외주 파트너
+    <span class="sub">프로그레스미디어 → 콘텐츠 마케터 → 쥬얼아이스 라인으로 일일 성과 커뮤니케이션 진행</span>
+  </div>
+  <div class="table-wrap">
+  <table>
+    <tbody>
+      <tr>
+        <td class="label-o" style="width:20%;">파트너사</td>
+        <td>
+          <strong style="font-size:14px;color:#9A3412;">㈜프로그레스미디어 (PROGRESS MEDIA)</strong><br>
+          담당: <strong>프로그레스미디어</strong><br>
+          <span style="color:#6B7280;font-size:11.5px;">
+            · 설립 2009.01 / 직원 약 150명 / 연 취급액 2,700억원(2024)<br>
+            · 주소: 서울시 구로구 디지털로26길 43, 대륭포스트타워8차 L동 1901~1905호<br>
+            · <strong>2025 NAVER PARTNER AWARDS · Partner of the Year · Best Performance Campaign 수상</strong><br>
+            · 2025 하반기 <strong>NAVER PREMIUM PARTNER</strong> 선정<br>
+            · 운영 채널: 네이버 SA/DA · 카카오 · 구글 · 당근 · G마켓/옥션 · 쿠팡
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-o">📊 데일리 리포트<br>(매일 확인)</td>
+        <td>
+          <strong>DAILY REPORT_프로그레스미디어</strong>
+          <a href="https://docs.google.com/spreadsheets/d/1MPJnPUIFh1WGWZy8hmjERjYKFn6Z0DkI4nsmuXwnc1o/edit">[구글 스프레드시트]</a><br>
+          <span style="color:#6B7280;font-size:11.5px;">프로그레스미디어 작성 → 콘텐츠 마케터 매일 분석 → 쥬얼아이스 보고 · SA/DA 월·주·일간 (ROAS·전환·CPC)</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-o">📎 회사소개서</td>
+        <td>
+          <strong>프로그레스미디어_회사소개서26년_최신.pdf</strong>
+          <a href="https://drive.google.com/file/d/15Fv1AwCSZ0ptBIzAqKELror8hxDpRX5g/view">[링크]</a><br>
+          <span style="color:#6B7280;font-size:11.5px;">프로그레스미디어와 협업 커뮤니케이션 전 필독</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="flow" style="margin-top:14px;">
+    <div class="flow-step">프로그레스미디어</div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">콘텐츠 마케터</div>
     <div class="flow-arrow">→</div>
     <div class="flow-step">쥬얼아이스</div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">대표</div>
   </div>
 
+  <!-- ❷ 사내 보고서 -->
+  <div class="hub-head purple">
+    ❷ 사내 보고서·리포트 시스템 (실적 데이터 전체)
+    <span class="sub">광고 성과 분석·기획·KPI 점검의 출발점. 일·주 단위로 데이터 업데이트 — 매일 열람 권장</span>
+  </div>
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th>부서/직책</th><th>주요 담당</th><th>협업 포인트</th></tr>
+      <tr>
+        <th style="width:24%;">리포트</th>
+        <th>위치 · 용도</th>
+        <th style="width:14%;">주기</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td><strong>쥬얼아이스 (사업본부)</strong></td><td>브랜드 · 예산 · 의사결정</td><td>콘텐츠 톤·예산 승인 · 컨셉 컨펌</td></tr>
-      <tr><td><strong>MD 운영팀</strong></td><td>상품 정보 · 사방넷 · 판매 데이터</td><td>상품 정보 공유 → 상세페이지·광고 소재 제작</td></tr>
-      <tr><td><strong>경영지원팀</strong></td><td>CS · 리뷰 · 고객 데이터</td><td>CS/리뷰 데이터 → 콘텐츠 소재화</td></tr>
-      <tr><td><strong>프로그레스미디어</strong> (외주)</td><td>네이버 광고 운영 · daily report</td><td>일일 성과 보고 수신 · 피드백 전달</td></tr>
-      <tr><td><strong>광고 에이전시 (비딩 중)</strong></td><td>메타 광고·콘텐츠 대행</td><td>6개사 비딩 → 선정 → 운영 관리</td></tr>
+      <tr>
+        <td class="label">통합 리포트<br>(메인)</td>
+        <td>
+          <a href="https://docs.google.com/spreadsheets/d/11byYTuUleS-kq3idS4e0Mgt368FssfnrHchyalHPuRI/edit">통합 리포트 (구글 스프레드시트)</a><br>
+          <span style="color:#6B7280;font-size:11px;">채널 통합 퍼포먼스 데이터 · <strong>광고 성과 분석 가장 먼저 열어볼 시트</strong></span>
+        </td>
+        <td class="center"><span class="badge badge-p">상시</span></td>
+      </tr>
+      <tr>
+        <td class="label">2026 통합 리포트<br>(연간 아카이브)</td>
+        <td>
+          <a href="https://drive.google.com/file/d/1HseBEu4rV9jWVwUVByYB96wgT8uMcrBl/view">2026 통합 리포트.xlsx</a><br>
+          <span style="color:#6B7280;font-size:11px;">2026년 전체 데이터 아카이브 · 월별 비교 분석용</span>
+        </td>
+        <td class="center"><span class="badge badge-y">월간</span></td>
+      </tr>
+      <tr>
+        <td class="label">업체별 매출 보고서<br>(2026)</td>
+        <td>
+          <a href="https://docs.google.com/spreadsheets/d/1bQXabJqvT6ytJgHZ-CzjGDbGxD2--ZDSJUsZBK3XTbk/edit">2026_쥬얼아이스 업체별 매출 보고서</a><br>
+          <span style="color:#6B7280;font-size:11px;">입점 채널별·판매처별 매출 · <strong>ROAS 계산 원천 데이터</strong></span>
+        </td>
+        <td class="center"><span class="badge badge-p">일·주</span></td>
+      </tr>
+      <tr>
+        <td class="label">업체별 매출 보고서<br>(2025 비교)</td>
+        <td>
+          <a href="https://docs.google.com/spreadsheets/d/1Niy-tE6vHEZmchOIAtSM84GUiBFuqIJLzWGY_Ec0RJU/edit">2025_쥬얼아이스 업체별 매출 보고서</a><br>
+          <span style="color:#6B7280;font-size:11px;">전년 대비 비교 분석 · SNS 도달 급락 원인 파악용</span>
+        </td>
+        <td class="center"><span class="badge badge-pending">참고</span></td>
+      </tr>
+      <tr>
+        <td class="label">메타광고 분석<br>(페이스북·인스타)</td>
+        <td>
+          <a href="https://drive.google.com/file/d/171Ctle2HfMfNxNac8sDJ8KbE-rSMjdY4/view">쥬얼아이스 메타광고 분석_20260414.xlsx</a><br>
+          <span style="color:#6B7280;font-size:11px;">F드라이브에도 있음: <code>05.마케팅 광고\메타광고\</code> · 소재별 CTR·CVR 성과 분석</span>
+        </td>
+        <td class="center"><span class="badge badge-y">주간</span></td>
+      </tr>
+      <tr>
+        <td class="label">통합 리포트<br>채널별 PDF</td>
+        <td>
+          <a href="https://drive.google.com/file/d/1FjCC6z_8VJBkHT9jJxGmnRyXsCCVGOW-/view">메타(META) PDF</a> &nbsp;|&nbsp;
+          <a href="https://drive.google.com/file/d/13c-vrzb3nFA1AjzOS4El7XaiXptq2iNh/view">네이버 PDF</a><br>
+          <span style="color:#6B7280;font-size:11px;">채널별 상세 보고 · 월간 미팅·대표 보고 자료</span>
+        </td>
+        <td class="center"><span class="badge badge-y">월간</span></td>
+      </tr>
+      <tr>
+        <td class="label">내부 업무공유<br>·회의록</td>
+        <td>
+          <a href="https://docs.google.com/spreadsheets/d/13yy1MtUhXNg4MEG6qL9lJogIDNdouXqQzv8mkUp2Kkk/edit">업무 공유 + 회의록 (쥬얼아이스 마스터 시트)</a><br>
+          <span style="color:#6B7280;font-size:11px;">주간업무·의사결정 기록·팀별 업무 · <strong>쥬얼아이스 전 구성원 공유 메인 시트</strong></span>
+        </td>
+        <td class="center"><span class="badge badge-p">상시</span></td>
+      </tr>
     </tbody>
   </table>
-</div>
-
-<!-- 3. 3개월 미션 -->
-<div class="section">
-  <div class="section-title">🎯 3. 3개월 미션 — SNS 도달 회복 <span class="tag">MISSION</span></div>
-
-  <div class="grid-3">
-    <div class="card r">
-      <h3>📅 4/24 (금) 제출</h3>
-      <p><strong>3개월 상세 계획서</strong><br>- SNS 채널별 전략<br>- 콘텐츠 발행 캘린더<br>- 광고 예산 분배안<br>- KPI 달성 로드맵</p>
-    </div>
-    <div class="card">
-      <h3>💰 ROAS 목표</h3>
-      <p><strong>3.0 이상</strong><br>- 메타·네이버·쿠팡 통합<br>- 주간 단위 모니터링<br>- 미달 시 즉시 소재 교체</p>
-    </div>
-    <div class="card g">
-      <h3>📈 도달 회복</h3>
-      <p><strong>인스타 월 50만</strong><br>- 1월 340K 수준 회복<br>- 현재 일 2.7K (급락)<br>- 릴스 중심 반등 전략</p>
-    </div>
   </div>
 
-  <table style="margin-top:14px;">
-    <thead>
-      <tr><th style="width:15%">월차</th><th>핵심 과제</th><th style="width:20%">산출물</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Month 1 (5월)</strong></td><td>진단 · 채널별 현황 파악 · 광고 대행사 선정 · 릴스 주 3회 리듬 구축</td><td>광고사 계약 · 주간 리듬표</td></tr>
-      <tr><td><strong>Month 2 (6월)</strong></td><td>메타·네이버·쿠팡 통합 리포트 정착 · 틱톡 테스트 · 유튜브 쇼츠 본격화</td><td>통합 리포트 템플릿 · 쇼츠 10건</td></tr>
-      <tr><td><strong>Month 3 (7월)</strong></td><td>ROAS 3.0 · 월 도달 50만 달성 · 콘텐츠 자동화 파이프라인</td><td>달성 보고서 · 다음 분기 계획</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<!-- 4. 광고 에이전시 비딩 -->
-<div class="section">
-  <div class="section-title">🏆 4. 광고 에이전시 비딩 현황 (6곳) <span class="tag">BIDDING</span></div>
-
-  <p style="font-size:12px;color:#6B7280;margin-bottom:12px;">
-    현재 <strong>메타 광고 대행사 선정 비딩 진행 중</strong>. 콘텐츠 마케터가 비딩 주관 및 최종 추천.
-  </p>
-
+  <!-- ❸ 광고 에이전시 6곳 비딩 -->
+  <div class="hub-head orange">
+    ❸ 광고 에이전시 6곳 비딩 자료 (미팅 후 최종 선정)
+    <span class="sub">
+      📂 구글 드라이브 통합 폴더:
+      <a href="https://drive.google.com/drive/folders/1Y4R5dfBOK9puUU4FQiPXwXZxp3sXGm1l" style="color:#FBBF24;">광고 에이전시 비딩 자료 2026</a>
+      · 회사소개서·견적서·레퍼런스 PDF 원본은 F드라이브 05번 폴더
+    </span>
+  </div>
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:20%">업체</th><th>특화 영역</th><th style="width:25%">상태 / 일정</th></tr>
+      <tr>
+        <th class="orange" style="width:16%;">업체</th>
+        <th class="orange" style="width:24%;">담당·진행</th>
+        <th class="orange">자료 내용 · 파일 위치</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td><strong>이프로애드 (EPROAD)</strong></td><td>이커머스 퍼포먼스 · ADVoost 리타겟팅</td><td><span class="badge badge-p">금 11시 미팅</span></td></tr>
-      <tr><td><strong>마제스타지 (MAZE)</strong></td><td>콘텐츠 브랜딩 · 인플루언서</td><td><span class="badge badge-p">금 14시 미팅</span></td></tr>
-      <tr><td><strong>CREATIP (크리에이팁)</strong></td><td>25Q1 크레덴셜</td><td><span class="badge badge-b">1차 검토</span></td></tr>
-      <tr><td><strong>붐잉 (Booming)</strong></td><td>소재 제작 스튜디오</td><td><span class="badge badge-b">1차 검토</span></td></tr>
-      <tr><td><strong>브랜드 액티베이션</strong></td><td>프리미엄 아이스 기획</td><td><span class="badge badge-pending">장기 레퍼런스</span></td></tr>
-      <tr><td><strong>AMPM 글로벌</strong> <span class="badge badge-new">NEW</span></td><td>3단 구조 (탐색 → 리타겟 → 재구매)</td><td><span class="badge badge-y">목 11시 미팅 (4/23)</span></td></tr>
+      <tr>
+        <td class="label-o">
+          <strong>이프로애드</strong><br>
+          <span style="font-weight:normal;font-size:10px;">EPROAD</span>
+        </td>
+        <td style="font-size:11.5px;">
+          EPROAD 담당<br>
+          📞 010-7378-8711<br>
+          ✉ gh.go@eproad.com<br>
+          <strong style="color:#9A3412;">★ 금 오전 11시 미팅</strong>
+        </td>
+        <td style="font-size:11px;">
+          📄 <strong>2026 EPROAD 회사소개서_KOR_2601.pdf</strong> (28MB)<br>
+          <span style="font-size:10px;color:#9CA3AF;font-style:italic;">구글 드라이브 업로드 대기 · 현재 F드라이브에서 열람</span><br>
+          <span style="color:#4B5563;">네이버 쇼핑검색 + ADVoost 리타겟팅 + 카카오 고객풀 11,000명 운영 · 전담 마케터 2인 / 일·주·월간 리포팅 체계 · 이커머스 퍼포먼스 특화</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-o">
+          <strong>마제스타지</strong><br>
+          <span style="font-weight:normal;font-size:10px;">MAZE</span>
+        </td>
+        <td style="font-size:11.5px;">
+          MAZE 담당<br>
+          📞 010-5030-6037<br>
+          ✉ santape27@majestade.co.kr<br>
+          <strong style="color:#9A3412;">★ 금 오후 2시 미팅</strong>
+        </td>
+        <td style="font-size:11px;">
+          📦 <a href="https://drive.google.com/file/d/1j3GUUotDHlbpaI3ov9aPmKCVYNsbsHXQ/view">Fwd__[MAZE] 쥬얼아이스 온라인광고 견적서 전달.zip</a> (13MB · 4개 파일)<br>
+          <span style="font-size:10px;color:#6B7280;">ZIP 내부:</span><br>
+          · 쥬얼아이스 온라인마케팅 <strong>견적서.pdf</strong> (183KB)<br>
+          · <strong>디지털광고상품소개서.pdf</strong> (회사소개서, 2.3MB)<br>
+          · [MAZE] 인플루언서 브랜디드 콘텐츠 레퍼런스.pptx (4.8MB)<br>
+          · [MAZE] 참고용 결과보고서.pdf (5.8MB)<br>
+          <span style="color:#4B5563;">메타광고 4회(카드뉴스 2 + 숏폼 2) + 카카오비즈보드 + 인플루언서 섭외 · 콘텐츠 브랜딩 특화</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-o">
+          <strong>CREATIP</strong><br>
+          <span style="font-weight:normal;font-size:10px;">크리에이팁</span>
+        </td>
+        <td style="font-size:11.5px;color:#6B7280;">
+          자료 수신 완료<br>
+          <span style="font-style:italic;">미팅 미정 · 1차 검토 대상</span>
+        </td>
+        <td style="font-size:11px;">
+          📄 <a href="https://drive.google.com/file/d/1kSRK3yzkFcd3SEbF4NFJQfd3VAtAGaXw/view">CREATIP CREDENTIALS_25Y Q1_v1.pdf</a> (41MB)<br>
+          <span style="color:#4B5563;">25년 Q1 크레덴셜 · 1차 검토 후 미팅 여부 쥬얼아이스 결정</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-o">
+          <strong>붐잉</strong><br>
+          <span style="font-weight:normal;font-size:10px;">Booming</span>
+        </td>
+        <td style="font-size:11.5px;color:#6B7280;">
+          자료 수신 완료<br>
+          <span style="font-style:italic;">미팅 미정 · 1차 검토 대상</span>
+        </td>
+        <td style="font-size:11px;">
+          📄 <a href="https://drive.google.com/file/d/10aAQsdSAxV9WrGpKKiCLfbw2b29dIpmv/view">붐잉_소재 포트폴리오.pdf</a> (5.9MB)<br>
+          <span style="color:#4B5563;">소재 제작 외주 중심 · 콘텐츠 스튜디오형 파트너</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label-o">
+          <strong>브랜드 액티베이션</strong><br>
+          <span style="font-weight:normal;font-size:10px;">타업체 제안</span>
+        </td>
+        <td style="font-size:11.5px;color:#6B7280;">
+          통합 브랜딩 제안 수신<br>
+          <span style="font-style:italic;">장기 레퍼런스용</span>
+        </td>
+        <td style="font-size:11px;">
+          📄 <a href="https://drive.google.com/file/d/1rHGnK1eAcwN6EvMyfnRRIEK4KXXl1DIK/view">Premium_Ice_Brand_Activation_260126.pdf</a> (14.7MB)<br>
+          📄 <a href="https://drive.google.com/file/d/1RY5hxLBx6PMwNgcF0o9szKamCLfLCcea/view">Jewelice_Premium_Ice_Clarity_260126.pdf</a> (23.6MB · 세트)<br>
+          <span style="color:#4B5563;">프리미엄 아이스 브랜드 액티베이션 기획안 · 장기 브랜딩 레퍼런스</span>
+        </td>
+      </tr>
+      <tr style="background:#FFFBEB;">
+        <td class="label-y">
+          <strong>AMPM 글로벌</strong><br>
+          <span style="font-weight:normal;font-size:10px;">🆕 신규 수신 4/21</span>
+        </td>
+        <td style="font-size:11.5px;">
+          AMPM 글로벌 담당<br>
+          <span style="color:#92400E;">광고퍼포먼스 3-1팀</span><br>
+          <strong style="color:#B91C1C;">★ 목 오전 11시 미팅 확정</strong><br>
+          <span style="font-size:10px;color:#6B7280;">(2026-04-23 · 와디즈 오픈일)</span>
+        </td>
+        <td style="font-size:11px;">
+          📄 <a href="https://drive.google.com/file/d/1Cm6M2iumori3WEZPcC86qcW-tGJv_ttK/view">쥬얼아이스&AMPM글로벌_마케팅제안서.pdf</a> (6.1MB)<br>
+          <span style="color:#6B7280;font-size:10px;">네이버·카카오 공식대행사 · 메타 에이전시 · 카카오 KPP · 2024 매출 445억 (E: 500억)</span><br>
+          <span style="color:#4B5563;">META(관심사/행동 타겟팅 + 리타겟팅) + 네이버 GFA(카탈로그 중심) + 애드부스트 + 쇼핑프로모션 + 전환배너 · <strong style="color:#9A3412;">3단 구조: 신규탐색 → 리타겟 → 재구매 루틴</strong> · 레퍼런스: 미르 텀블러 / 텀블러 인사이 / 음식물처리기</span>
+        </td>
+      </tr>
+      <tr style="background:#FEF3C7;">
+        <td colspan="3" style="font-size:11.5px;color:#92400E;">
+          📊 <a href="https://drive.google.com/file/d/1JBpmW8G9QWia8HNlEkxAIkrh0BS9KLOk/view">쥬얼아이스 광고비딩비교표_20260420.xlsx</a> — 쥬얼아이스 작성 6업체 비교 원본 시트 (AMPM 추가 예정)
+        </td>
+      </tr>
     </tbody>
   </table>
-
-  <div style="margin-top:14px;">
-    <div class="card">
-      <h3>📌 비딩 판단 기준</h3>
-      <ul>
-        <li><strong>퍼포먼스 데이터 역량</strong> — ROAS 3.0+ 달성 레퍼런스</li>
-        <li><strong>소재 제작 내재화</strong> — 외주 체인 최소화</li>
-        <li><strong>프리미엄 브랜드 핏</strong> — 쥬얼아이스 감성 이해도</li>
-        <li><strong>커뮤니케이션 속도</strong> — 주간 정기 미팅 가능 여부</li>
-      </ul>
-    </div>
   </div>
-</div>
 
-<!-- 5. 현재 외주 파트너 -->
-<div class="section">
-  <div class="section-title">🤝 5. 현재 외주 파트너 <span class="tag">PARTNER</span></div>
-
+  <!-- ❹ 쥬얼아이스 브랜드 컨셉 -->
+  <div class="hub-head dark">
+    ❹ 쥬얼아이스 브랜드·컨셉 자료 — 음료의 마지막 보석
+    <span class="sub">
+      영문 컨셉: <em style="color:#FBBF24;">"The Final Jewel of Every Drink · Ice changes everything"</em><br>
+      호소다 다카히로 <em>컨셉수업</em> 방법론 적용 · 2026.04.09 재정의 · 모든 소재·카피·캠페인 기획 시 최우선 기준
+    </span>
+  </div>
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:25%">파트너</th><th>담당 영역</th><th style="width:25%">협업 방식</th></tr>
+      <tr>
+        <th class="dark" style="width:26%;">자료</th>
+        <th class="dark">링크 · 용도</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td><strong>프로그레스미디어</strong></td><td>네이버 광고 운영 (검색·쇼핑·파워링크)</td><td>일일 daily report 수신 · 주간 피드백</td></tr>
-      <tr><td>메타 광고 (신규 비딩 중)</td><td>페이스북·인스타그램 광고</td><td>6개사 비딩 → 5월 선정 예정</td></tr>
-      <tr><td>쿠팡 광고 (내부 운영)</td><td>쿠팡 애즈</td><td>MD 운영팀과 협업 · 콘텐츠 마케터가 소재 담당</td></tr>
+      <tr>
+        <td class="label-y">📂 브랜드소개서 폴더<br>(대외 공유용)</td>
+        <td style="font-size:11.5px;">
+          <a href="https://drive.google.com/drive/folders/1z1kaSmMD-QA5LJSut-_TYB7OWAC-Xmdf">브랜드소개서 (구글 드라이브 폴더)</a><br>
+          <span style="color:#6B7280;font-size:11px;">대외 공유용 브랜드 소개서 모음 · B2B 제안·에이전시 브리핑·인플루언서 협업 시 전달</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">컨셉수업 폴더<br>(기획 원본)</td>
+        <td style="font-size:11.5px;">
+          <a href="https://drive.google.com/drive/folders/1PU7fM9KyKlD93A9e7Hk_bIbIlIvsfbhu">컨셉수업 쥬얼아이스 기획잡기 폴더</a><br>
+          <span style="color:#6B7280;font-size:11px;">호소다 컨셉수업 기반 브랜드 재정의 전 과정 · 기획 원본</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">쥬얼아이스 컨셉북<br>(PDF)</td>
+        <td style="font-size:11.5px;">
+          <a href="https://drive.google.com/file/d/1rdp-kEEEDy9WJmNNL1W1AkBw2dVhbOMa/view">쥬얼아이스_컨셉북.pdf</a><br>
+          <span style="color:#6B7280;font-size:11px;">5챕터 (본질 / 텐션 / 재프레이밍 / 가치도 / 실행) · <strong>최우선 필독</strong></span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">컨셉 기획서<br>(MD)</td>
+        <td style="font-size:11.5px;">
+          <a href="https://drive.google.com/file/d/1dB8b_MmHiCMcr0ERFA7y54wdvaskYwu8/view">쥬얼아이스_컨셉기획서.md</a><br>
+          <span style="color:#6B7280;font-size:11px;">5단계 컨셉 프레임 + 3컨셉안 비교 + 캠페인 메시지 레벨 1~4</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">2024 브랜드 소개서<br>(국문 PDF)</td>
+        <td style="font-size:11.5px;">
+          <a href="https://drive.google.com/file/d/11nMfZDGx4O4O9DvIGVX4zPTxC2luQcSe/view">24 쥬얼아이스 브랜드 소개서.pdf</a><br>
+          <span style="color:#6B7280;font-size:11px;">펀딩 20억+ 성과 / 잠재고객 8분류 / KEY-SELLING POINT / 전체 제품 라인업</span>
+        </td>
+      </tr>
+      <tr>
+        <td class="label">프리미엄 아이스 메이커<br>브랜드 소개 (최신)</td>
+        <td style="font-size:11.5px;">
+          <a href="https://drive.google.com/file/d/1EImQ-On2rlxeEBRCOCbfSkBsMpOFpjNE/view">쥬얼아이스 — 프리미엄 아이스 메이커 브랜드 소개.pdf</a><br>
+          <span style="color:#6B7280;font-size:11px;">브랜드소개서 폴더 내 · 2026.04 기준 최신 브랜드 자료</span>
+        </td>
+      </tr>
     </tbody>
   </table>
-</div>
-
-<!-- 6. SNS 채널별 운영 -->
-<div class="section">
-  <div class="section-title">📱 6. SNS 운영 채널별 전략 <span class="tag">SNS</span></div>
-
-  <div class="grid-2">
-    <div class="card">
-      <h3>📸 인스타그램 (최우선)</h3>
-      <ul>
-        <li><strong>피드</strong> — 주 2-3회 · 제품 비주얼·라이프스타일</li>
-        <li><strong>릴스</strong> — 주 3-4회 · 도달 회복 핵심 수단</li>
-        <li><strong>스토리</strong> — 일 1-2회 · 리뷰·행사·Q&A</li>
-        <li><strong>목표</strong> — 월 도달 50만 회복</li>
-      </ul>
-    </div>
-    <div class="card y">
-      <h3>📺 유튜브</h3>
-      <ul>
-        <li><strong>쇼츠</strong> — 주 2-3회 · 릴스 리퍼포스</li>
-        <li><strong>정규 영상</strong> — 월 1-2회 · 제품 리뷰·사용법</li>
-        <li><strong>유튜브 쇼핑 연동</strong> (자사몰 카페24)</li>
-      </ul>
-    </div>
-    <div class="card g">
-      <h3>🎵 틱톡 (신규 도입 검토)</h3>
-      <ul>
-        <li><strong>테스트 기간</strong> — 6월 내 파일럿 10건</li>
-        <li><strong>타겟</strong> — 2030 홈카페 문화</li>
-        <li><strong>전략</strong> — 인스타 릴스 멀티 플랫폼 발행</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>✍️ 블로그 · 카카오채널</h3>
-      <ul>
-        <li><strong>블로그</strong> — 월 2-4건 · SEO·스마트스토어 연동</li>
-        <li><strong>카카오채널</strong> — 주 1회 프로모션 푸시</li>
-        <li>카카오채널: <a href="http://pf.kakao.com/_xnmxgMX" target="_blank" style="color:#5E3E9F;font-weight:700;">pf.kakao.com/_xnmxgMX</a></li>
-      </ul>
-    </div>
   </div>
-</div>
 
-<!-- 7. 콘텐츠 제작 스케줄 -->
-<div class="section">
-  <div class="section-title">📅 7. 콘텐츠 제작·발행 스케줄 <span class="tag">SCHEDULE</span></div>
+  <div class="welcome-box" style="margin-top:14px;">
+    <strong>📝 컨셉 3줄 요약 (모든 소재 기획의 기준)</strong><br>
+    <strong style="color:#B83200;">1. 재정의</strong> &nbsp; 쥬얼아이스 = 얼음 기계 ✗ → <strong>음료를 완성하는 마지막 재료</strong> ✓<br>
+    <strong style="color:#B83200;">2. 텐션</strong> &nbsp; 음료는 프리미엄화됐지만 <strong>얼음만 여전히 "그냥 얼음"</strong> — 그 간극이 기회<br>
+    <strong style="color:#B83200;">3. 실행</strong> &nbsp; 기능 설명 대신 <strong>"이 한 잔이 완벽해지는 순간"</strong> 경험으로 번역
+  </div>
 
-  <p style="font-size:12px;color:#6B7280;margin-bottom:12px;">
-    <strong>소재 제작 주체: 콘텐츠 마케터 (내부 제작 원칙)</strong> · 광고 대행사 소재는 별도 검수
-  </p>
-
+  <!-- ❺ F드라이브 폴더 구조 -->
+  <div class="hub-head grey">
+    ❺ 사내 F드라이브 폴더 구조 가이드
+    <span class="sub">쥬얼아이스 업무 폴더 <code style="color:#FBBF24;background:rgba(0,0,0,0.3);">F:\0 팀원별 업무\쥬얼아이스\</code> 하위 · 사내 네트워크에서 직접 접근</span>
+  </div>
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:10%">요일</th><th style="width:18%">인스타 피드/릴스</th><th style="width:18%">유튜브</th><th style="width:18%">블로그</th><th>기타</th></tr>
+      <tr>
+        <th class="grey" style="width:32%;">폴더</th>
+        <th class="grey">찾을 수 있는 자료</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td><strong>월</strong></td><td>릴스 발행</td><td>-</td><td>주간 리뷰 포스팅</td><td>주간 광고 리포트 작성</td></tr>
-      <tr><td><strong>화</strong></td><td>피드 발행</td><td>쇼츠 발행</td><td>-</td><td>제품 촬영/편집</td></tr>
-      <tr><td><strong>수</strong></td><td>스토리 · 리뷰</td><td>-</td><td>-</td><td>광고 소재 점검</td></tr>
-      <tr><td><strong>목</strong></td><td>릴스 발행</td><td>-</td><td>SEO 포스팅</td><td>대행사 미팅</td></tr>
-      <tr><td><strong>금</strong></td><td>피드 · 위크엔드 프로모션</td><td>쇼츠 발행</td><td>-</td><td>카카오채널 푸시</td></tr>
-      <tr><td><strong>주말</strong></td><td>릴스 · 스토리</td><td>정규영상 (격주)</td><td>-</td><td>자동 예약 발행</td></tr>
+      <tr>
+        <td><code>05.마케팅 광고\</code></td>
+        <td style="font-size:11.5px;">광고 에이전시 6곳 자료 (EPROAD·MAZE·CREATIP·붐잉·브랜드액티베이션·AMPM) · 메타광고 분석 · 네이버 지표 · 와디즈 펀딩 분석 · 비딩 비교표 · 아블러 상세페이지 · 체험단 결과</td>
+      </tr>
+      <tr>
+        <td><code>04.상품기획&시장조사\</code></td>
+        <td style="font-size:11.5px;">아블러 상품소개서 v.03 · 시장조사 자료 · 제품 기획 문서</td>
+      </tr>
+      <tr>
+        <td><code>09.회사서류\</code></td>
+        <td style="font-size:11.5px;">쥬얼아이스 회사 공식 서류 · 사업자등록증 · 통신판매업 신고증 · 법인인감증명 · 하나카드 통장사본 등 행정 서류 (대외 제안·계약 시)</td>
+      </tr>
+      <tr>
+        <td><code>01.거래처정보\</code></td>
+        <td style="font-size:11.5px;">입점 거래처 정보 · 벤더 리스트 · 해피홈 재고 리스트 · 세종기프트 등 협력사 자료</td>
+      </tr>
+      <tr>
+        <td><code>02.입점몰관리\</code></td>
+        <td style="font-size:11.5px;">네이버/쿠팡/11번가/지마켓 등 입점몰별 운영 자료 · 상품등록 관리</td>
+      </tr>
+      <tr>
+        <td><code>03.사방넷\</code></td>
+        <td style="font-size:11.5px;">사방넷 통합관리 (주문·재고·송장) · SKU/채널 매칭 테이블</td>
+      </tr>
+      <tr>
+        <td><code>06.디자인\</code></td>
+        <td style="font-size:11.5px;">브랜드 디자인 자산 · 배너 · 썸네일 원본 (소재 제작 시 참조)</td>
+      </tr>
+      <tr>
+        <td><code>07.지원사업\</code></td>
+        <td style="font-size:11.5px;">정부지원사업 신청서 · 정책자금 관련 자료</td>
+      </tr>
+      <tr>
+        <td><code>08.인사채용\</code></td>
+        <td style="font-size:11.5px;"><strong>이 파일(본 전달 내용)도 여기에 위치</strong> · 채용 서류 · 인수인계 자료 · 개인정보동의서</td>
+      </tr>
+      <tr>
+        <td><code>10.공동구매\</code></td>
+        <td style="font-size:11.5px;">공동구매 구좌 기획 · 카카오톡딜 프로모션 자료</td>
+      </tr>
     </tbody>
   </table>
-</div>
-
-<!-- 8. 브랜드 컨셉 -->
-<div class="section">
-  <div class="section-title">💎 8. 브랜드 컨셉 (모든 소재·카피 기준) <span class="tag">BRAND</span></div>
-
-  <div class="concept-hero">
-    <div class="kr">The Final Jewel of Every Drink</div>
-    <div class="en">Ice changes everything</div>
-    <div class="meta">호소다 다카히로 컨셉수업 방법론 · 2026.04.09 재정의</div>
   </div>
 
-  <div class="grid-2" style="margin-top:14px;">
-    <div class="card">
-      <h3>🎯 컨셉 해석</h3>
-      <ul>
-        <li><strong>"Final Jewel"</strong> — 음료를 완성하는 마지막 보석</li>
-        <li><strong>"Every Drink"</strong> — 모든 음료의 프리미엄화</li>
-        <li><strong>"Ice changes everything"</strong> — 얼음이 경험을 바꾼다</li>
-      </ul>
-    </div>
-    <div class="card y">
-      <h3>✅ 콘텐츠 적용 원칙</h3>
-      <ul>
-        <li><strong>감성 우선</strong> — 투명함·청량감·프리미엄</li>
-        <li><strong>비주얼 중심</strong> — 텍스트보다 영상·이미지</li>
-        <li><strong>Use case 먼저</strong> — 제품보다 상황</li>
-        <li><strong>CTA 명확</strong> — 구매·팔로우·공유</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="card g" style="margin-top:14px;">
-    <h3>🎨 브랜드 비주얼 가이드</h3>
-    <ul>
-      <li><strong>컬러</strong> — 화이트·아이스블루·실버 (투명 얼음 계열)</li>
-      <li><strong>포맷</strong> — 피드 1:1 / 4:5 · 릴스 9:16</li>
-      <li><strong>해시태그</strong> — 브랜드 + 카테고리 + 감성 조합</li>
-      <li><strong>타겟</strong> — 2030 홈카페·홈바 문화 · 선물 구매자 · B2B 식음료 업장</li>
-    </ul>
+  <div class="alert-box" style="margin-top:14px;">
+    <strong>📌 입사 첫주 자료 숙지 순서 제안</strong><br>
+    ① 데일리 리포트 + 통합 리포트로 현재 광고 운영 현황 파악 ·
+    ② 업체별 매출 보고서 최근 3개월 트렌드 확인 ·
+    ③ 쥬얼아이스 컨셉북 + 2024 브랜드 소개서 정독 ·
+    ④ 광고 에이전시 6곳 자료 일독 (목요일 AMPM · 금요일 EPROAD·MAZE 미팅 동행 우선) ·
+    ⑤ 메타광고 분석 시트로 현재 소재별 ROAS 파악
   </div>
 </div>
 
-<!-- 9. 광고 계정 이슈 (참고) -->
+<!-- ══ 이번 주 광고 에이전시 미팅 일정 ══ -->
 <div class="section">
-  <div class="section-title">⚠️ 9. 광고 계정 보안 주의 <span class="tag">SECURITY</span></div>
+  <div class="section-title">🗓️ 이번 주 광고 에이전시 미팅 일정 <span class="tag">MEETING</span></div>
+  <div class="section-sub">세 업체 모두 비딩 진행 중. 미팅 후 최종 선정 또는 병행 여부 쥬얼아이스가 결정. 콘텐츠 마케터는 미팅 동행 및 이후 핸들링 담당.</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>시간</th>
+        <th>업체명</th>
+        <th>담당자</th>
+        <th>연락처</th>
+        <th>이메일</th>
+        <th>미팅 목적</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:#FEF3C7;">
+        <td><strong style="color:#92400E;">목요일 오전 11시 🆕</strong></td>
+        <td><strong>AMPM 글로벌</strong></td>
+        <td>AMPM 글로벌 담당</td>
+        <td style="color:#9CA3AF;">(연락처 미확인)</td>
+        <td style="color:#9CA3AF;">(이메일 미확인)</td>
+        <td>제안서 검토 + 3단 구조 전략 확인 <span style="color:#DC2626;font-weight:bold;">⚠️ 와디즈 오픈일</span></td>
+      </tr>
+      <tr style="background:#FFEDD5;">
+        <td><strong style="color:#9A3412;">금요일 오전 11시 ★</strong></td>
+        <td><strong>이프로애드 (EPROAD)</strong></td>
+        <td>EPROAD 담당</td>
+        <td>010-7378-8711</td>
+        <td>gh.go@eproad.com</td>
+        <td>견적 확인 + 운영 시스템 검토</td>
+      </tr>
+      <tr style="background:#DBEAFE;">
+        <td><strong style="color:#1E40AF;">금요일 오후 2시 ★</strong></td>
+        <td><strong>마제스타지 (MAZE)</strong></td>
+        <td>MAZE 담당</td>
+        <td>010-5030-6037</td>
+        <td>santape27@majestade.co.kr</td>
+        <td>견적 확인 + 콘텐츠 제작 범위 확인</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══ 광고 에이전시 비딩 비교 ══ -->
+<div class="section">
+  <div class="section-title">📊 광고 에이전시 비딩 히스토리 & 비교 <span class="tag">BIDDING</span></div>
+  <div class="section-sub">2026-04-15 두 업체로부터 견적서 및 회사소개서 수신 · 4/21 AMPM글로벌 추가 수신 · 첨부 PDF 별도 확인 필요.</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:16%">항목</th>
+        <th style="width:42%">마제스타지 (MAZE)</th>
+        <th style="width:42%">이프로애드 (EPROAD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">회사 위치</td>
+        <td style="background:#FFF7ED;">서울 강남구 논현로 748 (세화빌딩 4층)</td>
+        <td style="background:#F0FDFA;">서울 강남구 선릉로 642 3층</td>
+      </tr>
+      <tr>
+        <td class="label">주력 채널</td>
+        <td style="background:#FFF7ED;">메타 + 카카오비즈보드 + 인플루언서</td>
+        <td style="background:#F0FDFA;">네이버 스토어 + 카카오 + 자사몰</td>
+      </tr>
+      <tr>
+        <td class="label">제안 내용</td>
+        <td style="background:#FFF7ED;white-space:pre-line;">• 메타광고 4회 (카드뉴스 2회 + 숏폼 2회)
+• 카카오비즈보드
+• 인플루언서 섭외·홍보</td>
+        <td style="background:#F0FDFA;white-space:pre-line;">• 네이버 쇼핑검색 + ADVoost 리타겟팅
+• 카카오 선물하기 + 11,000 고객풀 메시지
+• 카카오비즈보드</td>
+      </tr>
+      <tr>
+        <td class="label">콘텐츠 제작</td>
+        <td style="background:#FFF7ED;">소재 직접 제작 포함 (이미지+숏폼)</td>
+        <td style="background:#F0FDFA;">소재 기획·제작 무상 지원</td>
+      </tr>
+      <tr>
+        <td class="label">전담 인원</td>
+        <td style="background:#FFF7ED;color:#6B7280;font-style:italic;">미확인 (미팅 확인 필요)</td>
+        <td style="background:#F0FDFA;"><strong>전담 마케터 2인 배정</strong></td>
+      </tr>
+      <tr>
+        <td class="label">리포팅 주기</td>
+        <td style="background:#FFF7ED;color:#6B7280;font-style:italic;">미확인 (미팅 확인 필요)</td>
+        <td style="background:#F0FDFA;"><strong>일·주·월간 리포팅</strong></td>
+      </tr>
+      <tr>
+        <td class="label">리타겟팅</td>
+        <td style="background:#FFF7ED;color:#6B7280;">미언급</td>
+        <td style="background:#F0FDFA;"><strong>ADVoost + 카카오 고객풀 11,000명</strong></td>
+      </tr>
+      <tr>
+        <td class="label">인플루언서</td>
+        <td style="background:#FFF7ED;"><strong>포함</strong></td>
+        <td style="background:#F0FDFA;color:#6B7280;">미언급</td>
+      </tr>
+      <tr>
+        <td class="label">특화 분야</td>
+        <td style="background:#FFF7ED;">콘텐츠 중심 브랜딩</td>
+        <td style="background:#F0FDFA;">이커머스 퍼포먼스</td>
+      </tr>
+      <tr>
+        <td class="label">견적 금액</td>
+        <td style="background:#FFF7ED;color:#6B7280;font-style:italic;">첨부 PDF 확인 필요</td>
+        <td style="background:#F0FDFA;color:#6B7280;font-style:italic;">첨부 PDF 확인 필요 (우선순위 * 표기)</td>
+      </tr>
+      <tr>
+        <td class="label">연락 이력</td>
+        <td style="background:#FFF7ED;">2026.04.15 견적서 수신</td>
+        <td style="background:#F0FDFA;white-space:pre-line;">2026.04.15 견적서+회사소개서 수신
+⚠ 회사소개서 PDF 4/22(수)까지 다운로드</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- AMPM 글로벌 신규 제안 요약 -->
+  <div class="ampm-box">
+    <h4>🆕 AMPM 글로벌 — 2026.04.21 신규 수신</h4>
+    <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr>
+          <td class="label-y" style="width:18%;">담당자</td>
+          <td>AMPM 글로벌 담당 · 광고퍼포먼스 3-1팀</td>
+        </tr>
+        <tr>
+          <td class="label-y">회사 규모</td>
+          <td>2024년 매출 445억 (E: 500억) · 네이버·카카오 공식대행사 · 메타·카카오 KPP</td>
+        </tr>
+        <tr>
+          <td class="label-y">주력 채널</td>
+          <td><strong>META</strong>(관심사·행동 타겟팅 + 리타겟팅) + <strong>네이버 GFA</strong>(카탈로그 중심) + 애드부스트 + 쇼핑프로모션 + 전환배너</td>
+        </tr>
+        <tr>
+          <td class="label-y">핵심 전략</td>
+          <td style="white-space:pre-line;">• 장바구니 이탈 회수 — 결제 직전 이탈 최소화 (리타겟 + 혜택 소구)
+• 카탈로그 중심 재편 — 머신러닝 최적화용 행동 데이터 축적
+• <strong>3단 구조 설계</strong>: ① 신규 탐색(Discovery) → ② 리타겟(Retargeting) → ③ 재구매(Retention)
+• 루틴 소비 유도 — 소진 주기 기반 재구매 알림</td>
+        </tr>
+        <tr>
+          <td class="label-y">레퍼런스</td>
+          <td>미르 텀블러 · 텀블러 인사이 · 음식물처리기 (관련업종 성공사례 보유)</td>
+        </tr>
+        <tr>
+          <td class="label-y">견적 금액</td>
+          <td style="color:#6B7280;font-style:italic;">제안서에 명시 · 상세 견적 협의 필요</td>
+        </tr>
+        <tr>
+          <td class="label-y">제안서</td>
+          <td>📄 <a href="https://drive.google.com/file/d/1Cm6M2iumori3WEZPcC86qcW-tGJv_ttK/view">쥬얼아이스&AMPM글로벌_마케팅제안서.pdf</a> (6.1MB · 30P 이상)</td>
+        </tr>
+        <tr>
+          <td class="label-y">미팅 상태</td>
+          <td style="color:#B91C1C;"><strong>목 오전 11시 미팅 확정 · 와디즈 오픈일 겹침 주의</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 미팅 체크리스트 ══ -->
+<div class="section">
+  <div class="section-title">✅ 미팅 시 공통 확인사항 체크리스트 <span class="tag">CHECK</span></div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:40px;">확인</th>
+        <th>확인 항목</th>
+        <th style="width:120px;">비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="chk">☐</td><td>월 광고비 최소/최대 예산 범위</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr><td class="chk">☐</td><td>에이전시 수수료율 (광고비의 15~20%)</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr><td class="chk">☐</td><td>계약 기간 및 중도 해지 조건</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr><td class="chk">☐</td><td>성과 미달 시 대응 방안</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr><td class="chk">☐</td><td>소재 수정 요청 횟수 및 리드타임</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr><td class="chk">☐</td><td>레퍼런스 업체 실제 ROAS 수치</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr><td class="chk">☐</td><td>첫 달 파일럿 예산 가능 여부</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr><td class="chk">☐</td><td>두 업체 동시 진행 가능 여부</td><td><span class="badge badge-p">공통</span></td></tr>
+      <tr style="background:#FFF7ED;"><td class="chk">☐</td><td>인플루언서 선정 기준 (ER 3% 이상)</td><td><span class="badge badge-o">MAZE</span></td></tr>
+      <tr style="background:#FFF7ED;"><td class="chk">☐</td><td>숏폼 제작 납기 및 수정 횟수</td><td><span class="badge badge-o">MAZE</span></td></tr>
+      <tr style="background:#F0FDFA;"><td class="chk">☐</td><td>전담 마케터 2인 경력·이커머스 경험</td><td><span class="badge badge-g">EPROAD</span></td></tr>
+      <tr style="background:#F0FDFA;"><td class="chk">☐</td><td>ADVoost 픽셀 설치 여부 및 셋업 기간</td><td><span class="badge badge-g">EPROAD</span></td></tr>
+      <tr style="background:#F0FDFA;"><td class="chk">☐</td><td>카카오 11,000 고객풀 활용 방식</td><td><span class="badge badge-g">EPROAD</span></td></tr>
+      <tr style="background:#FEF3C7;"><td class="chk">☐</td><td>3단 구조 (탐색/리타겟/재구매) 예산 배분</td><td><span class="badge badge-y">AMPM</span></td></tr>
+      <tr style="background:#FEF3C7;"><td class="chk">☐</td><td>네이버 GFA 카탈로그 머신러닝 최적화 기간</td><td><span class="badge badge-y">AMPM</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══ 1. 광고 운영 범위 ══ -->
+<div class="section">
+  <div class="section-title">1️⃣ 광고 운영 범위 <span class="tag">SCOPE</span></div>
+  <div class="section-sub">기본 채널 외 추가 확장 가능 채널 적극 검토 및 제안</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:24%">채널</th>
+        <th style="width:42%">운영 방향</th>
+        <th style="width:18%">우선순위</th>
+        <th style="width:16%">비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>메타 (Facebook/Instagram)</strong></td>
+        <td>피드·릴스·스토리 광고. 브랜드 인지 + 구매 전환</td>
+        <td><span class="badge badge-r">★★★ 필수</span></td>
+        <td>소재 자체 제작 병행</td>
+      </tr>
+      <tr>
+        <td><strong>네이버 (쇼핑검색·디스플레이)</strong></td>
+        <td>스마트스토어 유입 극대화. ADVoost 리타겟팅</td>
+        <td><span class="badge badge-r">★★★ 필수</span></td>
+        <td>프로그레스미디어</td>
+      </tr>
+      <tr>
+        <td><strong>카카오 (비즈보드·선물하기)</strong></td>
+        <td>기존 고객풀 11,000명 활용. 시즌 집중</td>
+        <td><span class="badge badge-y">★★ 권장</span></td>
+        <td>시즌별 집중</td>
+      </tr>
+      <tr>
+        <td><strong>인플루언서 마케팅</strong></td>
+        <td>ER 3% 이상 계정 우선 선정</td>
+        <td><span class="badge badge-y">★★ 권장</span></td>
+        <td>효율 검토 후</td>
+      </tr>
+      <tr>
+        <td><strong>기타 채널 (유튜브·틱톡 등)</strong></td>
+        <td>예산·소재 준비 상황에 따라 순차 확장</td>
+        <td><span class="badge badge-pending">★ 검토</span></td>
+        <td>팀장 컨펌 후</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══ 2. 지표 분석 및 보고 체계 ══ -->
+<div class="section">
+  <div class="section-title">2️⃣ 지표 분석 및 보고 체계 <span class="tag">REPORT</span></div>
+  <div class="section-sub">외주 업체 데이터 수합·분석 → 통합 보고서로 관리. 소재별 성과 주기별 트래킹</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:12%">보고 주기</th>
+        <th style="width:42%">보고 내용</th>
+        <th style="width:22%">형식</th>
+        <th style="width:24%">전달 대상</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="center"><strong>일간</strong></td><td>전일 광고비·노출·클릭·전환 요약</td><td>슬랙/카카오 메시지</td><td>쥬얼아이스</td></tr>
+      <tr><td class="center"><strong>주간</strong></td><td>채널별 ROAS·CTR·CPC + 소재별 성과 TOP3</td><td>엑셀/구글시트</td><td>쥬얼아이스</td></tr>
+      <tr><td class="center"><strong>월간</strong></td><td>전체 광고 성과 + 소재별 분석 + 개선 제안</td><td>보고서 (PPT/슬라이드)</td><td>쥬얼아이스</td></tr>
+      <tr><td class="center"><strong>분기</strong></td><td>분기 캠페인 리뷰 + 다음 분기 전략 제안</td><td>보고서 + 미팅</td><td>쥬얼아이스</td></tr>
+      <tr><td class="center"><strong>반기</strong></td><td>반기 성과 총정리 + 예산 재배분 제안</td><td>보고서 + 미팅</td><td>쥬얼아이스</td></tr>
+      <tr><td class="center"><strong>연간</strong></td><td>연간 전체 성과 리뷰 + 다음 연도 전략 수립</td><td>보고서 + 미팅</td><td>쥬얼아이스</td></tr>
+    </tbody>
+  </table>
+  </div>
 
   <div class="alert-box">
-    <strong>🚨 2026.03.11 메타 광고 계정 해킹 이력</strong><br>
-    피해액: <strong>1,963,635원</strong> · 원인: 관리자 권한 탈취 · 조치: 2FA 전면 적용·권한 최소화<br>
-    → 콘텐츠 마케터는 <strong>2FA 필수 · 공용 PC 로그인 금지 · 대행사 권한 최소화</strong> 원칙 준수
+    <strong>📊 [KPI 기준]</strong> ROAS 목표 3.0 이상 · CTR 낮음 → 썸네일·첫 3초 점검 · 전환율 낮음 → 랜딩페이지·가격 점검
   </div>
 </div>
 
-<!-- 10. 협업 포인트 -->
+<!-- ══ 3. 광고 소재 업로드 계획표 ══ -->
 <div class="section">
-  <div class="section-title">🔗 10. 내부 협업 포인트 <span class="tag">COLLAB</span></div>
+  <div class="section-title">3️⃣ 광고 소재 업로드 계획표 (요일별 발행) <span class="tag">CONTENT</span></div>
+  <div class="section-sub">소재는 고정 일정에 맞춰 계획적으로 제작·업로드. 최소 2주 전 기획 완료</div>
 
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:20%">협업 대상</th><th>공유 받는 것</th><th>산출물</th></tr>
+      <tr>
+        <th style="width:26%">소재 유형</th>
+        <th style="width:22%">업로드 목표 주기</th>
+        <th style="width:22%">수량 목표</th>
+        <th style="width:30%">담당</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td><strong>MD 운영팀</strong></td><td>사방넷 상품 정보 · SKU 업데이트 · 판매 데이터</td><td>상세페이지 · 광고 소재</td></tr>
-      <tr><td><strong>경영지원팀</strong></td><td>CS 문의 패턴 · 리뷰 데이터 · 고객 피드백</td><td>FAQ 콘텐츠 · 리뷰 릴스 · 스토리 소재</td></tr>
-      <tr><td><strong>프로그레스미디어</strong></td><td>네이버 광고 daily report</td><td>주간 통합 리포트 · 키워드 전략 피드백</td></tr>
-      <tr><td><strong>쥬얼아이스 (대표)</strong></td><td>브랜드 방향성 · 예산 승인 · 컨셉 컨펌</td><td>월간 KPI 보고 · 분기 전략 보고</td></tr>
+      <tr><td>메타 피드 이미지</td><td>매주 월요일</td><td>주 2개 이상</td><td>콘텐츠 마케터 (자체 제작)</td></tr>
+      <tr><td>메타 릴스 영상</td><td>격주 수요일</td><td>월 2개 이상</td><td>콘텐츠 마케터 (외주 or 자체)</td></tr>
+      <tr><td>인스타그램 스토리</td><td>매주 수·금</td><td>주 2회 이상</td><td>콘텐츠 마케터 (자체 제작)</td></tr>
+      <tr><td>네이버 쇼핑 광고 소재</td><td>월초 기준 갱신</td><td>월 1회 이상</td><td>콘텐츠 마케터</td></tr>
+      <tr><td>카카오 메시지 소재</td><td>시즌 전 2주</td><td>시즌별 1세트</td><td>콘텐츠 마케터 + 팀장 컨펌</td></tr>
+      <tr><td>인플루언서 브리핑 자료</td><td>협업 3주 전</td><td>건별</td><td>콘텐츠 마케터</td></tr>
     </tbody>
   </table>
+  </div>
+
+  <div class="alert-box">
+    ※ <strong>모든 소재 업로드 전 쥬얼아이스 최종 컨펌 필수</strong>
+  </div>
 </div>
 
-<!-- 11. 핵심 운영 자료 링크 -->
+<!-- ══ 4. 쥬얼아이스 컨셉 & 소재 방향 ══ -->
 <div class="section">
-  <div class="section-title">📚 11. 핵심 운영 자료 링크 <span class="tag">DOCS</span></div>
+  <div class="section-title">4️⃣ 쥬얼아이스 컨셉 & 소재 방향 <span class="tag">BRAND</span></div>
+  <div class="section-sub">브랜드 감성을 항상 중심에. 매출과 직결되는 콘텐츠 우선</div>
 
-  <a href="https://charlesmaster911.github.io/jewelice-playbook/jihyun-wadiz.html" class="link-card" target="_blank">
-    <div class="lc-title">🎯 와디즈 내부 대시보드</div>
-    <div class="lc-desc">프로젝트 현황 · 미디어믹스 광고 · 이벤트·리워드 · 콘텐츠 연동</div>
-  </a>
-
-  <a href="https://charlesmaster911.github.io/jewelice-playbook/jihyun-inventory.html" class="link-card" target="_blank">
-    <div class="lc-title">📦 재고·발주 통합 분석</div>
-    <div class="lc-desc">70 SKU · 긴급발주 · 와디즈 연동 · 공구 · 광고 가능 물량 확인</div>
-  </a>
-
-  <a href="https://drive.google.com/file/d/1jGCzVZG8ptGl1J_byXOTqfbCxCYC4s7G/view" class="link-card" target="_blank">
-    <div class="lc-title">📊 마스터마인딩그룹 내부 계정관리</div>
-    <div class="lc-desc">37개 채널 계정 · SNS 어드민 · 광고 계정 · 담당자 컨택</div>
-  </a>
-
-  <a href="https://drive.google.com/file/d/1fhs-yPrIN-WzoCvUzK5qekx0gVGN3Yvp/view" class="link-card" target="_blank">
-    <div class="lc-title">📊 2026년 3월 리뷰 및 추진과제</div>
-    <div class="lc-desc">채널 운영 · 광고 · 자사몰 리뉴얼 · 유튜브 쇼핑 종합</div>
-  </a>
-</div>
-
-<!-- 12. 첫 주 온보딩 체크리스트 -->
-<div class="section">
-  <div class="section-title">✅ 12. 첫 주 온보딩 체크리스트 <span class="tag">WEEK-1</span></div>
-
+  <div class="table-wrap">
   <table>
     <thead>
-      <tr><th style="width:12%">Day</th><th>할 일</th><th style="width:18%">담당</th></tr>
+      <tr>
+        <th style="width:22%;">구분</th>
+        <th>내용</th>
+      </tr>
     </thead>
     <tbody>
-      <tr><td><strong>Day 1</strong></td><td>환영 미팅 · 본 문서 정독 · 메타/인스타/유튜브/틱톡/블로그/카카오채널 계정 권한 발급 · 2FA 설정</td><td>쥬얼아이스</td></tr>
-      <tr><td><strong>Day 2</strong></td><td>브랜드 컨셉 숙지 · 기존 SNS 채널별 콘텐츠·KPI 현황 파악 · 프로그레스미디어 daily report 읽기</td><td>콘텐츠 마케터</td></tr>
-      <tr><td><strong>Day 3</strong></td><td>광고 에이전시 6곳 비딩 자료 전체 검토 · 목 11시 AMPM 글로벌 미팅 참석</td><td>콘텐츠 마케터</td></tr>
-      <tr><td><strong>Day 4 (4/24 금)</strong></td><td><strong>3개월 계획서 제출</strong> · 금 11시 이프로애드 미팅 · 금 14시 마제스타지 미팅</td><td>콘텐츠 마케터 → 쥬얼아이스</td></tr>
-      <tr><td><strong>Day 5</strong></td><td>첫 주 회고 · 2주차 콘텐츠 캘린더 작성 · 광고 대행사 추천 1차 제안</td><td>콘텐츠 마케터 → 쥬얼아이스</td></tr>
+      <tr><td class="label-o">브랜드 핵심 감성</td><td>얼음의 투명함·청량감·프리미엄 → 고급스럽지만 일상적인 사치</td></tr>
+      <tr><td class="label-o">브랜드 컬러 톤</td><td>화이트 / 아이스블루 / 실버 계열. 자연스러운 청량감, 과한 보정 지양</td></tr>
+      <tr><td class="label-o">주요 타겟</td><td>홈카페·홈바 즐기는 2030 / 선물 구매자 / B2B 식음료 업장</td></tr>
+      <tr><td class="label-o">소재 기획 순서</td><td>① Use Case (어떤 상황에서 쓰나) → ② 차별점 → ③ 명확한 CTA</td></tr>
+      <tr><td class="label-o">채널별 규격</td><td>릴스·쇼츠: <strong>9:16</strong> / 피드: <strong>1:1 또는 4:5</strong> / 썸네일: 첫 3초 승부</td></tr>
+      <tr><td class="label-o">매출 직결 원칙</td><td>ROAS 3.0+ 소재 패턴 분석 → 반복 확장. 감성만 있고 전환 없는 소재 빠른 교체</td></tr>
+      <tr><td class="label-o" style="color:#B91C1C;background:#FEE2E2;">금지 사항</td><td style="color:#B91C1C;font-weight:bold;">브랜드 톤과 맞지 않는 할인 과도 강조 / 저화질 소재 / 경쟁사 직접 비교</td></tr>
     </tbody>
   </table>
+  </div>
 </div>
 
-<!-- 13. KPI -->
+<!-- ══ 5. KPI 및 성과 기준 ══ -->
 <div class="section">
-  <div class="section-title">🎯 13. KPI 및 성과 기준 <span class="tag">KPI</span></div>
+  <div class="section-title">🎯 5. KPI 및 성과 기준 <span class="tag">KPI</span></div>
 
   <div class="grid-2">
     <div class="card">
-      <h3>📊 정량 KPI</h3>
+      <h3>📈 핵심 성과 지표</h3>
       <ul>
-        <li>통합 <strong>ROAS <span class="kpi-big">3.0 이상</span></strong></li>
-        <li>인스타 <strong>월 도달 50만</strong> 회복</li>
-        <li>참여율 <strong>ER 3% 이상</strong></li>
-        <li>콘텐츠 <strong>발행 주기 준수율 95%+</strong></li>
+        <li><strong>ROAS 3.0 이상</strong> 유지</li>
+        <li><strong>인스타 월 도달 50만 회복</strong> (SNS 도달 급락 해결)</li>
+        <li><strong>참여율(ER) 3% 이상</strong> 인플루언서 기준</li>
+        <li><strong>콘텐츠 발행 주기 준수</strong> (요일별 고정)</li>
       </ul>
     </div>
     <div class="card g">
-      <h3>✨ 정성 기준</h3>
+      <h3>🔍 성과 진단 기준</h3>
       <ul>
-        <li>브랜드 컨셉 일관성 <strong>100% 유지</strong></li>
-        <li>CS/리뷰 기반 콘텐츠 <strong>주 1건 이상</strong></li>
-        <li>광고 대행사 커뮤니케이션 <strong>주간 정례</strong></li>
-        <li>보안 사고 <strong>0건</strong> (2FA·권한관리)</li>
+        <li>CTR 낮음 → <strong>썸네일 · 첫 3초</strong> 문제</li>
+        <li>전환율 낮음 → <strong>랜딩페이지 · 가격</strong> 문제</li>
+        <li>인플루언서 판단 → <strong>팔로워보다 ER</strong> 우선</li>
+        <li>ROAS 3.0 미달 소재 → <strong>빠른 교체</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══ 6. 업무 원칙 & 컨펌 체계 ══ -->
+<div class="section">
+  <div class="section-title">6️⃣ 업무 원칙 & 컨펌 체계 <span class="tag">RULES</span></div>
+  <div class="section-sub">주도적으로 기획·실행. 모든 최종 결정은 쥬얼아이스·대표 컨펌 하에 진행</div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:22%;">업무 구분</th>
+        <th style="width:38%;">자율 범위</th>
+        <th>컨펌 필요 기준</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">소재 기획·제작</td>
+        <td>자율 기획 및 초안 제작 가능</td>
+        <td><strong>업로드 전 쥬얼아이스 최종 컨펌</strong></td>
+      </tr>
+      <tr>
+        <td class="label">광고 예산 집행</td>
+        <td>월 예산 내 집행 자율. 예산 추가/변경은 사전 보고</td>
+        <td><strong>예산 변경 시 팀장 + 대표 컨펌</strong></td>
+      </tr>
+      <tr>
+        <td class="label">신규 채널 진입</td>
+        <td>제안서 작성 후 보고. 임의 집행 금지</td>
+        <td style="color:#B91C1C;font-weight:bold;">팀장 + 대표 컨펌 필수</td>
+      </tr>
+      <tr>
+        <td class="label">외주업체 커뮤니케이션</td>
+        <td>일상적 소통·요청 자율</td>
+        <td><strong>계약·조건 변경 시 팀장 컨펌</strong></td>
+      </tr>
+      <tr>
+        <td class="label">성과 부진 대응</td>
+        <td>이슈 발생 즉시 팀장에게 보고</td>
+        <td style="color:#B91C1C;font-weight:bold;">단독 판단·중단 금지</td>
+      </tr>
+      <tr>
+        <td class="label">콘텐츠 방향 전환</td>
+        <td>데이터 근거 제안서 작성 후 보고</td>
+        <td style="color:#B91C1C;font-weight:bold;">팀장 + 대표 컨펌 필수</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══ 7. 협업 포인트 ══ -->
+<div class="section">
+  <div class="section-title">🤝 7. 팀 내 협업 포인트 <span class="tag">COLLAB</span></div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:20%;">협업 대상</th>
+        <th>콘텐츠 마케터가 제공</th>
+        <th>콘텐츠 마케터가 받음</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label"><strong>AMD (운영 지원)</strong></td>
+        <td>광고 소재 · 상세페이지 피드백 · 채널별 썸네일</td>
+        <td>상품 정보 · 가격 · 옵션 · SKU 구성</td>
+      </tr>
+      <tr>
+        <td class="label"><strong>경영지원</strong></td>
+        <td>콘텐츠 소재화 (리뷰 응용) · SNS 고객 반응 전달</td>
+        <td>CS 리뷰 데이터 · 고객 피드백 원본</td>
+      </tr>
+      <tr>
+        <td class="label"><strong>MD 운영팀</strong></td>
+        <td>광고 운영 현황 · 채널별 성과 리포트</td>
+        <td>가격 정책 · 프로모션 일정 · 상품 방향</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══ 8. 첫 주 온보딩 체크리스트 ══ -->
+<div class="section">
+  <div class="section-title">✅ 8. 첫 주 온보딩 체크리스트 (Day 1~5) <span class="tag">WEEK-1</span></div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:12%">Day</th>
+        <th>할 일</th>
+        <th style="width:20%">담당</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Day 1</strong></td>
+        <td>환영 미팅 · 본 문서 정독 · 구글드라이브·슬랙·잔디 계정 권한 발급 · 사내 F드라이브 접근 확인</td>
+        <td>쥬얼아이스</td>
+      </tr>
+      <tr>
+        <td><strong>Day 2</strong></td>
+        <td>데일리 리포트 + 통합 리포트 숙지 · 최근 3개월 ROAS 트렌드 파악 · 메타광고 분석 시트 정독</td>
+        <td>콘텐츠 마케터</td>
+      </tr>
+      <tr>
+        <td><strong>Day 3</strong></td>
+        <td>쥬얼아이스 컨셉북 + 2024 브랜드 소개서 정독 · 컨셉 3줄 요약 내재화 · 경쟁사 SNS 리서치</td>
+        <td>콘텐츠 마케터</td>
+      </tr>
+      <tr>
+        <td><strong>Day 4</strong></td>
+        <td>광고 에이전시 6곳 자료 일독 · <strong>AMPM 글로벌 목 11시 미팅 동행</strong> · 질문 리스트 사전 준비</td>
+        <td>콘텐츠 마케터 + 쥬얼아이스</td>
+      </tr>
+      <tr>
+        <td><strong>Day 5</strong></td>
+        <td><strong>EPROAD 금 11시 + MAZE 금 14시 미팅 동행</strong> · 미팅 기록 정리 · 첫주 회고 + 2주차 계획 수립</td>
+        <td>콘텐츠 마케터 + 쥬얼아이스</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ══ 9. 3개월 실행안 (참고 + 본인 제안) ══ -->
+<div class="section">
+  <div class="section-title">🎯 9. 3개월 실행안 — 팀장 추진과제 참고 + 본인 계획 수립 <span class="tag">PLAN</span></div>
+  <div class="section-sub">
+    <strong style="color:#D97706;">📘 팀장의 3개월 추진과제(2026.03~05)는 참고 자료</strong>이며, 콘텐츠 마케터는 SNS·광고·콘텐츠 영역에서 <strong>본인만의 실행 계획</strong>을 수립하여 팀장에게 제안·협의합니다. 팀장 아이디어가 수시로 추가되므로 본 문서를 지속적으로 확인.
+  </div>
+
+  <div class="alert-box">
+    <strong>💡 실행안 작성 가이드:</strong><br>
+    · 팀장의 3개월 추진과제 (운영 구조 → 가격 리셋 → 브랜드 업그레이드) 흐름을 이해한 뒤<br>
+    · 콘텐츠 마케터 본인 영역에서 <strong>월별 마일스톤 + 주간 단위 액션</strong>을 직접 설계<br>
+    · 초안 작성 후 팀장과 협의 → 합의된 내용을 이 문서에 추가 반영 (삭제 없이 누적)
+  </div>
+
+  <div class="grid-3" style="margin-top:14px;">
+    <div class="card b">
+      <h3>📅 1개월차 (샘플 · 본인 계획으로 교체)</h3>
+      <ul>
+        <li>데이터·컨셉 완전 숙지</li>
+        <li>광고 에이전시 최종 선정 지원</li>
+        <li>신규 소재 기획안 작성</li>
+        <li>요일별 콘텐츠 발행 체계 셋업</li>
+        <li>와디즈 오픈 대응 지원</li>
+      </ul>
+    </div>
+    <div class="card y">
+      <h3>📅 2개월차 (샘플 · 본인 계획으로 교체)</h3>
+      <ul>
+        <li>신규 소재 실제 배포 시작</li>
+        <li>메타·네이버·카카오 실운영</li>
+        <li>주간 리포팅 정착</li>
+        <li>인플루언서 1차 섭외</li>
+        <li>ROAS 3.0 달성 확인</li>
+      </ul>
+    </div>
+    <div class="card g">
+      <h3>📅 3개월차 (샘플 · 본인 계획으로 교체)</h3>
+      <ul>
+        <li>SNS 도달 50만 회복 검증</li>
+        <li>인플루언서 확장 (ER 3%+)</li>
+        <li>월간 리포트 체계화</li>
+        <li>소재 패턴 데이터화</li>
+        <li>다음 분기 전략 제안</li>
       </ul>
     </div>
   </div>
 
-  <div style="margin-top:14px;padding:10px 14px;background:#FEF3C7;border-radius:6px;font-size:11.5px;color:#92400E;">
-    ⚠️ <strong>성과 판단 원칙:</strong> CTR 낮으면 → 썸네일/첫 3초 문제 / 전환율 낮으면 → 랜딩페이지·가격 문제 / 인플루언서는 팔로워보다 <strong>ER 3% 이상</strong> 우선
+  <!-- 팀장 아이디어 누적 공간 -->
+  <div style="margin-top:16px;padding:14px 18px;background:#FEF3C7;border-left:5px solid #F59E0B;border-radius:8px;">
+    <div style="font-size:13px;font-weight:800;color:#92400E;margin-bottom:6px;">💡 팀장 아이디어 · 수시 업데이트 영역</div>
+    <div style="font-size:12px;color:#78350F;line-height:1.7;">
+      · 팀장이 수시로 던지는 아이디어·방향성이 여기에 <strong>누적</strong>됩니다. (삭제 없이 추가만)<br>
+      · 초기 상태 — 첫 아이디어 대기 중
+    </div>
   </div>
 </div>
 
@@ -515,7 +1171,7 @@
 <div class="footer">
   <strong>💎 쥬얼아이스 콘텐츠 마케터 온보딩 · 2026-04-21</strong><br>
   전달: 쥬얼아이스 · 작성: 화경 (AI)<br>
-  🔗 영구 URL: <a href="https://charlesmaster911.github.io/jewelice-onboarding/">charlesmaster911.github.io/jewelice-onboarding/</a><br>
+  🔗 영구 URL: <a href="https://charlesmaster911.github.io/jewelice-onboarding/">charlesmaster911.github.io/jewelice-onboarding</a><br>
   <small>본 문서는 쥬얼아이스 컨펌 하에 작성되었으며, 실시간 업데이트됩니다.</small>
 </div>
 
