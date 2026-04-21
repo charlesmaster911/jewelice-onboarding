@@ -137,22 +137,10 @@
   @media print {
     body { background: #fff; padding: 10px; }
     .section { box-shadow: none; border: 1px solid #ccc; }
-    .edit-fab, .edit-bar { display: none !important; }
+    .edit-fab, .edit-bar, .edit-toolbar { display: none !important; }
   }
 
-  /* ── 편집 버튼 ── */
-  .edit-fab {
-    position: fixed; right: 28px; bottom: 28px; z-index: 999;
-    background: #2B3A5C; color: #fff; padding: 14px 22px;
-    border-radius: 30px; font-size: 13px; font-weight: bold;
-    text-decoration: none; letter-spacing: -0.3px;
-    box-shadow: 0 6px 20px rgba(43,58,92,0.35);
-    display: flex; align-items: center; gap: 8px;
-    transition: all 0.2s;
-  }
-  .edit-fab:hover { background: #E2703A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(226,112,58,0.4); }
-  .edit-fab .icon { font-size: 16px; }
-
+  /* ── 상단 편집 바 ── */
   .edit-bar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 998;
     background: linear-gradient(90deg, #2B3A5C, #3D4F72);
@@ -160,39 +148,156 @@
     display: flex; justify-content: space-between; align-items: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
+  .edit-bar.editing { background: linear-gradient(90deg, #C05020, #E2703A); }
   .edit-bar .left { display: flex; align-items: center; gap: 14px; }
   .edit-bar .tag { background: #E2703A; padding: 2px 9px; border-radius: 10px; font-weight: bold; font-size: 11px; }
+  .edit-bar.editing .tag { background: #fff; color: #C05020; }
   .edit-bar .right { display: flex; gap: 8px; }
-  .edit-bar a {
-    color: #fff; text-decoration: none;
-    background: rgba(255,255,255,0.15); padding: 4px 12px;
+  .edit-bar button, .edit-bar a {
+    color: #fff; text-decoration: none; cursor: pointer;
+    background: rgba(255,255,255,0.15); padding: 5px 12px;
     border-radius: 6px; font-size: 11.5px; font-weight: bold;
+    border: none; font-family: inherit;
     transition: background 0.15s;
   }
-  .edit-bar a:hover { background: rgba(255,255,255,0.28); }
+  .edit-bar button:hover, .edit-bar a:hover { background: rgba(255,255,255,0.28); }
+  .edit-bar .btn-primary { background: #E2703A; }
+  .edit-bar .btn-primary:hover { background: #F08048; }
+  .edit-bar.editing .btn-primary { background: #fff; color: #C05020; }
+  .edit-bar.editing .btn-primary:hover { background: #F5F5F5; }
   body { padding-top: 50px !important; }
+
+  /* ── 편집 중 시각 효과 ── */
+  body.editing .wrapper { outline: 2px dashed #E2703A; outline-offset: 12px; }
+  body.editing [contenteditable="true"]:hover { background: rgba(226,112,58,0.05); }
+  body.editing [contenteditable="true"]:focus {
+    outline: 2px solid #E2703A;
+    background: #FFF8F3;
+    box-shadow: 0 0 0 4px rgba(226,112,58,0.15);
+  }
+
+  /* ── 편집 모드 플로팅 툴바 ── */
+  .edit-toolbar {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    background: #fff; border: 2px solid #E2703A;
+    border-radius: 14px; padding: 12px 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: none; flex-direction: column; gap: 8px;
+    min-width: 220px;
+  }
+  body.editing .edit-toolbar { display: flex; }
+  .edit-toolbar .tb-title { font-size: 11px; font-weight: bold; color: #C05020; margin-bottom: 4px; letter-spacing: 1px; }
+  .edit-toolbar button {
+    padding: 8px 12px; border: 1px solid #ddd; background: #fff;
+    border-radius: 7px; font-size: 12px; font-weight: bold; cursor: pointer;
+    font-family: inherit; text-align: left;
+    transition: all 0.15s;
+  }
+  .edit-toolbar button:hover { background: #FFF3E8; border-color: #E2703A; }
+  .edit-toolbar .btn-save { background: #E2703A; color: #fff; border-color: #E2703A; }
+  .edit-toolbar .btn-save:hover { background: #C05020; }
+  .edit-toolbar .status {
+    font-size: 10.5px; color: #888; padding: 6px 10px;
+    background: #FAFAFA; border-radius: 6px; line-height: 1.5;
+  }
+  .edit-toolbar .status.saved { color: #1A6B5A; background: #E8F7EE; }
 </style>
 </head>
 <body>
 
 <!-- 상단 편집 바 -->
-<div class="edit-bar">
+<div class="edit-bar" id="editBar">
   <div class="left">
-    <span class="tag">EDITABLE</span>
+    <span class="tag" id="modeTag">VIEW</span>
     <span>쥬얼아이스 마케팅팀 &middot; 박명훈 온보딩 문서</span>
   </div>
   <div class="right">
-    <a href="https://github.com/charlesmaster911/jewelice-onboarding/edit/main/index.html" target="_blank">✏️ 편집</a>
+    <button class="btn-primary" id="toggleEditBtn" onclick="toggleEditMode()">✏️ 편집 모드</button>
     <a href="https://github.com/charlesmaster911/jewelice-onboarding/commits/main/index.html" target="_blank">📜 수정 이력</a>
-    <a href="https://github.com/charlesmaster911/jewelice-onboarding/issues/new?title=내용+수정+제안&body=어떤+내용을+수정할까요?" target="_blank">💬 수정 제안</a>
+    <a href="https://github.com/charlesmaster911/jewelice-onboarding/edit/main/index.html" target="_blank">🔧 영구 저장(GitHub)</a>
   </div>
 </div>
 
-<!-- 플로팅 편집 버튼 -->
-<a href="https://github.com/charlesmaster911/jewelice-onboarding/edit/main/index.html" target="_blank" class="edit-fab">
-  <span class="icon">✏️</span>
-  <span>이 페이지 편집하기</span>
-</a>
+<!-- 편집 모드 플로팅 툴바 -->
+<div class="edit-toolbar" id="editToolbar">
+  <div class="tb-title">✏️ 편집 도구</div>
+  <button class="btn-save" onclick="saveToLocal()">💾 브라우저에 저장</button>
+  <button onclick="downloadHTML()">⬇️ HTML 파일 다운로드</button>
+  <button onclick="resetChanges()">↺ 원본으로 되돌리기</button>
+  <button onclick="toggleEditMode()">✓ 편집 완료</button>
+  <div class="status" id="editStatus">편집 모드 ON · 본문 아무 데나 클릭해서 수정</div>
+</div>
+
+<script>
+const REPO = 'charlesmaster911/jewelice-onboarding';
+const STORAGE_KEY = 'jewelice_onboarding_draft';
+
+// 페이지 로드 시 저장된 초안 복원
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    const wrapper = document.querySelector('.wrapper');
+    if (wrapper && confirm('이전에 편집하던 초안이 있습니다. 불러올까요?')) {
+      wrapper.innerHTML = saved;
+    }
+  }
+});
+
+function toggleEditMode() {
+  const body = document.body;
+  const wrapper = document.querySelector('.wrapper');
+  const bar = document.getElementById('editBar');
+  const tag = document.getElementById('modeTag');
+  const btn = document.getElementById('toggleEditBtn');
+
+  const editing = body.classList.toggle('editing');
+  bar.classList.toggle('editing');
+
+  if (editing) {
+    wrapper.contentEditable = 'true';
+    tag.textContent = 'EDIT';
+    btn.textContent = '✓ 편집 완료';
+  } else {
+    wrapper.contentEditable = 'false';
+    tag.textContent = 'VIEW';
+    btn.textContent = '✏️ 편집 모드';
+  }
+}
+
+function saveToLocal() {
+  const wrapper = document.querySelector('.wrapper');
+  localStorage.setItem(STORAGE_KEY, wrapper.innerHTML);
+  const status = document.getElementById('editStatus');
+  status.textContent = '✓ 브라우저에 저장됨 · 새로고침해도 유지됨';
+  status.classList.add('saved');
+  setTimeout(() => { status.classList.remove('saved'); status.textContent = '편집 모드 ON · 본문 아무 데나 클릭해서 수정'; }, 3000);
+}
+
+function downloadHTML() {
+  // 편집 바/툴바/스크립트 제외하고 전체 HTML 저장
+  const doctype = '<!DOCTYPE html>\n';
+  const html = document.documentElement.outerHTML;
+  const blob = new Blob([doctype + html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '박명훈_전달내용_통합_' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  const status = document.getElementById('editStatus');
+  status.textContent = '✓ HTML 파일 다운로드 완료';
+  status.classList.add('saved');
+}
+
+function resetChanges() {
+  if (confirm('모든 편집 내용을 버리고 원본으로 되돌립니다. 진행할까요?')) {
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+}
+</script>
 
 <div class="wrapper">
 
