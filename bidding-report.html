@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>쥬얼아이스 광고 3사 미팅록 보고 (대표님 보고용 · 2page)</title>
+<title>쥬얼아이스 광고 3사 미팅록 보고 (대표님 보고용 · A4 2page)</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: #F3F4F6; }
   body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: #1F2937;
-    line-height: 1.6;
+    line-height: 1.5;
     padding: 24px 12px;
   }
 
@@ -26,50 +26,59 @@
   }
   .toolbar button:hover { background: #5B21B6; }
 
+  /* A4 정확히 1페이지에 맞추기 */
   .page {
-    width: 210mm; min-height: 297mm; max-width: 100%;
+    width: 210mm;
+    height: 297mm;
+    max-width: 100%;
     margin: 0 auto 18px;
     background: white;
-    padding: 14mm 14mm 12mm;
+    padding: 11mm 12mm;
     box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
     page-break-after: always;
+    break-after: page;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
-  .page:last-child { page-break-after: auto; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
   .page-num {
-    position: absolute; top: 8mm; right: 14mm;
-    font-size: 10px; color: #9CA3AF; font-weight: 600;
+    position: absolute; top: 6mm; right: 12mm;
+    font-size: 9.5px; color: #9CA3AF; font-weight: 600;
   }
 
   .header {
-    border-bottom: 3px solid #7C3AED;
-    padding-bottom: 10px; margin-bottom: 14px;
+    border-bottom: 2.5px solid #7C3AED;
+    padding-bottom: 7px; margin-bottom: 10px;
     display: flex; justify-content: space-between; align-items: flex-end;
+    flex-shrink: 0;
   }
   .header h1 {
-    font-size: 20px; font-weight: 900; letter-spacing: -0.4px;
+    font-size: 17px; font-weight: 900; letter-spacing: -0.4px;
     background: linear-gradient(90deg, #7C3AED, #FBBF24);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .header .meta { font-size: 11px; color: #6B7280; text-align: right; }
+  .header .meta { font-size: 9.5px; color: #6B7280; text-align: right; line-height: 1.5; }
   .header .meta strong { color: #1F2937; }
 
   /* 종합 추천 */
   .summary {
     background: linear-gradient(135deg, #FEF3C7, #FDE68A);
-    border-left: 5px solid #7C3AED;
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-bottom: 14px;
+    border-left: 4px solid #7C3AED;
+    padding: 9px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
   }
-  .summary .verdict { font-size: 14px; font-weight: 800; color: #7C2D12; margin-bottom: 8px; letter-spacing: -0.2px; }
-  .summary-list { display: flex; flex-direction: column; gap: 6px; }
+  .summary .verdict { font-size: 12px; font-weight: 800; color: #7C2D12; margin-bottom: 6px; letter-spacing: -0.2px; }
+  .summary-list { display: flex; flex-direction: column; gap: 4px; }
   .summary-row {
-    background: rgba(255,255,255,0.85); padding: 8px 12px; border-radius: 8px;
-    font-size: 11.5px; line-height: 1.65; border-left: 3px solid;
+    background: rgba(255,255,255,0.85); padding: 6px 10px; border-radius: 6px;
+    font-size: 10px; line-height: 1.55; border-left: 3px solid;
   }
-  .summary-row strong { font-size: 12.5px; }
+  .summary-row strong { font-size: 10.5px; }
   .summary-row.eproad { border-color: #EA580C; }
   .summary-row.eproad strong { color: #7C2D12; }
   .summary-row.maze { border-color: #DC2626; }
@@ -77,130 +86,153 @@
   .summary-row.ampm { border-color: #F59E0B; }
   .summary-row.ampm strong { color: #78350F; }
 
-  /* 5대 기준 매트릭스 */
-  .matrix-title { font-size: 13px; font-weight: 800; color: #5B21B6; margin: 14px 0 6px; }
+  /* 매트릭스 */
+  .matrix-title { font-size: 11.5px; font-weight: 800; color: #5B21B6; margin: 9px 0 4px; flex-shrink: 0; }
   .matrix {
-    width: 100%; border-collapse: collapse; font-size: 10.5px;
-    border-radius: 8px; overflow: hidden;
+    width: 100%; border-collapse: collapse; font-size: 9.2px;
+    flex-shrink: 0;
   }
-  .matrix th, .matrix td { padding: 7px 9px; border: 1px solid #E5E7EB; text-align: left; vertical-align: top; line-height: 1.55; }
-  .matrix th { background: #7C3AED; color: white; font-weight: 700; font-size: 10.5px; }
+  .matrix th, .matrix td { padding: 4px 6px; border: 1px solid #E5E7EB; text-align: left; vertical-align: top; line-height: 1.45; }
+  .matrix th { background: #7C3AED; color: white; font-weight: 700; font-size: 9.2px; }
   .matrix th.eproad { background: #EA580C; }
   .matrix th.maze { background: #DC2626; }
   .matrix th.ampm { background: #F59E0B; }
-  .matrix td.label { background: #F3E8FF; color: #5B21B6; font-weight: 700; font-size: 10.5px; width: 16%; }
+  .matrix td.label { background: #F3E8FF; color: #5B21B6; font-weight: 700; font-size: 9.2px; width: 16%; }
   .matrix td.eproad { background: #FFEDD5; color: #7C2D12; }
   .matrix td.maze { background: #FEE2E2; color: #991B1B; }
   .matrix td.ampm { background: #FEF3C7; color: #78350F; }
-  .matrix .score { text-align: center; font-weight: 800; font-size: 14px; }
+  .matrix .score { text-align: center; font-weight: 800; font-size: 12px; }
 
   /* 시나리오 */
-  .scenario-title { font-size: 13px; font-weight: 800; color: #5B21B6; margin: 14px 0 6px; }
+  .scenario-title { font-size: 11.5px; font-weight: 800; color: #5B21B6; margin: 9px 0 4px; flex-shrink: 0; }
   .scenario {
-    width: 100%; border-collapse: collapse; font-size: 10.5px;
+    width: 100%; border-collapse: collapse; font-size: 9.2px; flex-shrink: 0;
   }
-  .scenario th { background: #7C3AED; color: white; padding: 7px 9px; font-weight: 700; }
-  .scenario td { padding: 7px 9px; border: 1px solid #E5E7EB; vertical-align: top; line-height: 1.65; }
+  .scenario th { background: #7C3AED; color: white; padding: 4px 6px; font-weight: 700; }
+  .scenario td { padding: 4px 6px; border: 1px solid #E5E7EB; vertical-align: top; line-height: 1.5; }
   .scenario tr.a { background: #FFEDD5; }
   .scenario tr.b { background: #FEE2E2; }
   .scenario tr.c { background: #FEF3C7; }
   .scenario tr.d { background: #F3E8FF; }
-  .scenario b { font-size: 11.5px; }
+  .scenario b { font-size: 10px; }
 
   /* 대표님 3대 조건 */
   .boss {
-    margin-top: 14px;
+    margin-top: auto;
     background: #1F2937; color: #F3F4F6;
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-size: 11px;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 9.5px;
+    flex-shrink: 0;
   }
   .boss .bt {
     display: inline-block; background: #FBBF24; color: #1F2937;
-    padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 800; margin-right: 8px;
+    padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 800; margin-right: 6px;
   }
   .boss-grid {
-    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 8px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 5px;
   }
   .boss-card {
     background: #374151; border-left: 3px solid;
-    padding: 8px 12px; border-radius: 8px; font-size: 10.5px; line-height: 1.7;
+    padding: 6px 9px; border-radius: 6px; font-size: 9.2px; line-height: 1.6;
   }
   .boss-card.eproad { border-color: #EA580C; }
   .boss-card.maze { border-color: #DC2626; }
   .boss-card.ampm { border-color: #F59E0B; }
-  .boss-card .bn { color: #FBBF24; font-weight: 800; font-size: 11px; margin-bottom: 4px; }
+  .boss-card .bn { color: #FBBF24; font-weight: 800; font-size: 10px; margin-bottom: 2px; }
 
-  /* 페이지 2 — 미팅록 */
+  /* PAGE 2 — 미팅록 3컬럼 */
   .meeting-intro {
-    background: #F3E8FF; border-left: 4px solid #7C3AED;
-    padding: 8px 14px; border-radius: 8px;
-    font-size: 11px; color: #5B21B6; margin-bottom: 12px;
+    background: #F3E8FF; border-left: 3px solid #7C3AED;
+    padding: 6px 11px; border-radius: 6px;
+    font-size: 9.5px; color: #5B21B6; margin-bottom: 9px;
+    flex-shrink: 0;
+  }
+
+  .meet-grid-3 {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px;
+    flex: 1;
+    overflow: hidden;
   }
 
   .meet-card {
-    border: 2px solid; border-radius: 10px;
-    margin-bottom: 12px;
-    padding: 12px 16px;
-    page-break-inside: avoid;
+    border: 1.5px solid; border-radius: 8px;
+    padding: 8px 10px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
   }
-  .meet-card.ampm { border-color: #F59E0B; background: linear-gradient(180deg, #FEF3C7 0%, #FFFFFF 12%); }
-  .meet-card.eproad { border-color: #EA580C; background: linear-gradient(180deg, #FFEDD5 0%, #FFFFFF 12%); }
-  .meet-card.maze { border-color: #DC2626; background: linear-gradient(180deg, #FEE2E2 0%, #FFFFFF 12%); }
+  .meet-card.ampm { border-color: #F59E0B; background: linear-gradient(180deg, #FEF3C7 0%, #FFFFFF 18%); }
+  .meet-card.eproad { border-color: #EA580C; background: linear-gradient(180deg, #FFEDD5 0%, #FFFFFF 18%); }
+  .meet-card.maze { border-color: #DC2626; background: linear-gradient(180deg, #FEE2E2 0%, #FFFFFF 18%); }
 
-  .meet-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-  .meet-head h2 { font-size: 14px; font-weight: 800; letter-spacing: -0.3px; }
+  .meet-order {
+    display: inline-block; padding: 1.5px 7px; border-radius: 10px;
+    font-size: 8.5px; font-weight: 700; color: white; margin-bottom: 3px;
+  }
+  .ampm .meet-order { background: #F59E0B; }
+  .eproad .meet-order { background: #EA580C; }
+  .maze .meet-order { background: #DC2626; }
+
+  .meet-card h2 { font-size: 11.5px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 1px; }
   .ampm h2 { color: #78350F; }
   .eproad h2 { color: #7C2D12; }
   .maze h2 { color: #991B1B; }
-  .meet-head .when { font-size: 10px; color: #6B7280; font-weight: 600; }
+  .meet-card .when { font-size: 8.5px; color: #6B7280; margin-bottom: 5px; font-weight: 600; }
 
   .verdict-box {
-    background: white; padding: 8px 12px; border-radius: 6px;
-    font-size: 11px; line-height: 1.7; margin-bottom: 8px;
-    border-left: 3px solid;
+    background: white; padding: 5px 8px; border-radius: 5px;
+    font-size: 8.7px; line-height: 1.55; margin-bottom: 5px;
+    border-left: 2.5px solid;
   }
   .ampm .verdict-box { border-color: #F59E0B; }
   .eproad .verdict-box { border-color: #EA580C; }
   .maze .verdict-box { border-color: #DC2626; }
-  .verdict-box b { font-size: 11.5px; }
+  .verdict-box b { font-size: 9px; }
 
-  .meet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
   .meet-sec h3 {
-    font-size: 10.5px; font-weight: 800; letter-spacing: 0.3px;
-    text-transform: uppercase; margin: 4px 0 3px;
+    font-size: 8.5px; font-weight: 800; letter-spacing: 0.2px;
+    text-transform: uppercase; margin: 4px 0 2px;
   }
   .ampm .meet-sec h3 { color: #92400E; }
   .eproad .meet-sec h3 { color: #9A3412; }
   .maze .meet-sec h3 { color: #B91C1C; }
-  .meet-sec ul { margin-left: 14px; }
-  .meet-sec li { margin-bottom: 1.5px; font-size: 10.5px; line-height: 1.6; }
+  .meet-sec ul { margin-left: 12px; }
+  .meet-sec li { margin-bottom: 0.5px; font-size: 8.5px; line-height: 1.5; }
 
   .actions-box {
-    background: rgba(255,255,255,0.85); border-radius: 6px;
-    padding: 8px 12px; margin-top: 8px;
-    border-top: 2px solid; font-size: 10.5px; line-height: 1.7;
+    margin-top: auto;
+    background: rgba(255,255,255,0.85); border-radius: 5px;
+    padding: 5px 8px; border-top: 2px solid;
+    font-size: 8.5px; line-height: 1.6;
   }
   .ampm .actions-box { border-color: #F59E0B; }
   .eproad .actions-box { border-color: #EA580C; }
   .maze .actions-box { border-color: #DC2626; }
-  .actions-box .at { font-size: 10px; font-weight: 800; margin-bottom: 3px; }
+  .actions-box .at { font-size: 8.5px; font-weight: 800; margin-bottom: 2px; }
   .ampm .actions-box .at { color: #92400E; }
   .eproad .actions-box .at { color: #9A3412; }
   .maze .actions-box .at { color: #B91C1C; }
 
   @media print {
-    body { background: white; padding: 0; }
+    body { background: white; padding: 0; margin: 0; }
     .toolbar { display: none; }
-    .page { box-shadow: none; padding: 12mm; margin: 0; }
+    .page {
+      box-shadow: none;
+      margin: 0;
+      width: 210mm;
+      height: 297mm;
+      page-break-after: always;
+      break-after: page;
+    }
+    .page:last-child { page-break-after: auto; break-after: auto; }
   }
-  @page { size: A4; margin: 0; }
+  @page { size: A4 portrait; margin: 0; }
 </style>
 </head>
 <body>
 
 <div class="toolbar">
-  <span><a href="bidding.html">← 비딩 비교 풀버전</a> · 2page 보고용 · 대표님 보고</span>
+  <span><a href="bidding.html">← 비딩 비교 풀버전</a> · A4 정확히 2page · 대표님 보고</span>
   <button onclick="window.print()">🖨 인쇄 / PDF 저장</button>
 </div>
 
@@ -218,16 +250,16 @@
 
   <!-- 종합 추천 -->
   <div class="summary">
-    <div class="verdict">🏆 종합 추천: 시나리오 A — 이프로애드(EPROAD) 단독 / 시나리오 C — EPROAD + MAZE 듀얼 (예산 여유 시)</div>
+    <div class="verdict">🏆 종합 추천: 시나리오 A — EPROAD 단독 / 시나리오 C — EPROAD + MAZE 듀얼 (예산 여유 시)</div>
     <div class="summary-list">
       <div class="summary-row eproad">
-        <strong>🥇 EPROAD 20/20</strong> — 대표님 3대 조건(레퍼런스·과장급 고정·재대행 금지) <strong>유일 명확 충족</strong>. 투입 10명 직급·경력·담당업무 서면 명시. 카멜그룹 SA 6개월 ROAS 400%↑·엘빈즈 가입 CPA → LTV 전환 성공. 20년 업력·콘텐츠제작본부 자체 보유.
+        <strong>🥇 EPROAD 20/20</strong> — 대표님 3대 조건(레퍼런스·과장급 고정·재대행 금지) <strong>유일 명확 충족</strong>. 투입 10명 직급·경력·담당업무 서면 명시. 카멜그룹 SA 6개월 ROAS 400%↑·엘빈즈 LTV 전환 성공. 20년 업력·콘텐츠제작본부 자체 보유.
       </div>
       <div class="summary-row maze">
-        <strong>🥈 MAZE 20/20</strong> — 미팅 중 제품 직접 체험하며 "이거 사야 될 것 같다" 자발 반응 + 리뷰 100+ 선행 조사. OOH 10년+ 전문성·풀스택 IMC·월 3,000 + 이벤트 5,000 탄력 운용. 단 커머스·소비재 레퍼런스 추가 증빙 필요.
+        <strong>🥈 MAZE 20/20</strong> — 미팅 중 제품 직접 체험 "이거 사야 될 것 같다" 자발 반응 + 리뷰 100+ 선행 조사. OOH 10년+·풀스택 IMC·월 3,000+이벤트 5,000 탄력. 단 커머스·소비재 레퍼런스 추가 증빙 필요.
       </div>
       <div class="summary-row ampm">
-        <strong>🥉 AMPM 16/20</strong> — 퍼널 3단 구조 진단 정확·매출 445억(E:500억) 안정적·계정 권한 즉시 요청. 단 소재 제작 분업·445억 클라이언트 다수 → 집중도 분산 우려. 분업 병행 서브 후보로만 권장.
+        <strong>🥉 AMPM 16/20</strong> — 퍼널 3단 구조 진단 정확·매출 445억(E:500억) 안정적. 단 소재 제작 분업·445억 클라이언트 다수 → 집중도 분산 우려. 분업 병행 서브 후보.
       </div>
     </div>
   </div>
@@ -257,13 +289,13 @@
       <td class="label">③ 디테일·집중</td>
       <td class="eproad">⭐⭐⭐⭐ 투입 10명 서면 + 코멘트·이슈·액션 리포트</td>
       <td class="maze">⭐⭐⭐⭐ 사고 0건 · PM 4~5명 전담</td>
-      <td class="ampm">⭐⭐⭐ 퍼널 진단 정확하나 집중도 분산</td>
+      <td class="ampm">⭐⭐⭐ 진단 정확하나 집중도 분산</td>
     </tr>
     <tr>
       <td class="label">④ 소재·콘텐츠 진심</td>
-      <td class="eproad">⭐⭐⭐⭐ 콘텐츠제작본부 자체 · CTR 0.9→2.1% 개선 사례</td>
+      <td class="eproad">⭐⭐⭐⭐ 콘텐츠제작본부 자체 · CTR 0.9→2.1% 개선</td>
       <td class="maze">⭐⭐⭐⭐ 프로덕션+스튜디오 본부 자체 · "B급 안 만든다"</td>
-      <td class="ampm">⭐⭐⭐ 진단 정확하나 소재 제작은 콘텐츠 마케터에 분업</td>
+      <td class="ampm">⭐⭐⭐ 소재 제작은 콘텐츠 마케터에 분업</td>
     </tr>
     <tr>
       <td class="label">⑤ 제품 가치 이해</td>
@@ -307,271 +339,285 @@
 
   <!-- 대표님 3대 조건 -->
   <div class="boss">
-    <span class="bt">대표님 3대 조건 충족 여부</span>
-    <span style="font-size:10.5px;">① 레퍼런스 증빙 · ② 과장급 고정 담당(교체 불가) · ③ 재대행 금지</span>
+    <span class="bt">대표님 3대 조건</span>
+    <span style="font-size:9px;">① 레퍼런스 증빙 · ② 과장급 고정 담당(교체 불가) · ③ 재대행 금지</span>
     <div class="boss-grid">
       <div class="boss-card eproad">
         <div class="bn">🥇 EPROAD</div>
-        ① 레퍼런스 ✅ 20+ (아모레·카멜·VISA·엘빈즈 외)<br>
-        ② 과장급 ✅ 6명 고정 (서면 명시)<br>
-        ③ 재대행 🟡 라이브 촬영만 외주
+        ① ✅ 20+ (아모레·카멜·VISA·엘빈즈)<br>
+        ② ✅ 6명 고정 (서면 명시)<br>
+        ③ 🟡 라이브 촬영만 외주
       </div>
       <div class="boss-card maze">
         <div class="bn">🥈 MAZE</div>
-        ① 레퍼런스 🟡 커머스·소비재 추가 필요<br>
-        ② 과장급 🟡 우재호 직급·팀장 투입률 재확인<br>
-        ③ 재대행 ✅ 원칙 금지
+        ① 🟡 커머스·소비재 추가 필요<br>
+        ② 🟡 우재호 직급·팀장 투입률 재확인<br>
+        ③ ✅ 원칙 금지
       </div>
       <div class="boss-card ampm">
         <div class="bn">🥉 AMPM</div>
-        ① 레퍼런스 🟡 미르·텀블러 인사이 (유사)<br>
-        ② 과장급 🟡 3-1팀 담당자 직급 미확인<br>
-        ③ 재대행 🟡 미확인
+        ① 🟡 미르·텀블러 인사이 (유사)<br>
+        ② 🟡 3-1팀 담당자 직급 미확인<br>
+        ③ 🟡 미확인
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- ========== PAGE 2 — 3사 미팅록 본문 ========== -->
+<!-- ========== PAGE 2 — 3사 미팅록 3 컬럼 ========== -->
 <div class="page">
   <div class="page-num">2 / 2</div>
 
   <div class="header">
     <h1>📝 3사 미팅록 본문 (한국 날짜 순)</h1>
     <div class="meta">
-      박지현 팀장 직접 기록<br>
+      박지현 팀장 직접 기록 · 동일 포맷 (미팅 총평 + 핵심 절 + 후속 액션)<br>
       ① AMPM 4/23 → ② EPROAD 4/24 11시 → ③ MAZE 4/24 14시
     </div>
   </div>
 
   <div class="meeting-intro">
-    📌 박지현 팀장이 미팅 자리에서 직접 받아 적은 회의록 본문을 동일 포맷(미팅 총평 + 핵심 절 + 후속 액션)으로 정리. 한국 날짜 순으로 시간순 배치.
+    📌 박지현 팀장이 미팅 자리에서 직접 받아 적은 회의록 본문을 한국 날짜 순으로 시간순 배치 (3사 동일 포맷).
   </div>
 
-  <!-- ① AMPM -->
-  <div class="meet-card ampm">
-    <div class="meet-head">
-      <h2>① AMPM글로벌 광고대행사 미팅 요약 🥉</h2>
-      <div class="when">2026-04-23 (목) · 박지현 단독 참석</div>
-    </div>
-    <div class="verdict-box">
-      <b>미팅 총평</b> — 전체 퍼널 구조·리타겟·소재 개선·보고 체계·데이터 분석 방향은 비교적 체계적으로 설명. CTR 하락·장바구니 이탈·구매 전환 저하 진단 방향 적정. <b>다만 실제 운영 역량과 제안 신뢰도는 별도 검증 필수.</b>
-    </div>
+  <div class="meet-grid-3">
 
-    <div class="meet-grid">
+    <!-- ① AMPM -->
+    <div class="meet-card ampm">
+      <span class="meet-order">① 4/23 (목)</span>
+      <h2>AMPM글로벌 🥉</h2>
+      <div class="when">박지현 단독 참석</div>
+
+      <div class="verdict-box">
+        <b>미팅 총평</b> — 퍼널·리타겟·소재·보고 체계 비교적 체계적. CTR 하락·장바구니 이탈·구매 전환 진단 적정. <b>실 운영 역량·신뢰도 별도 검증 필수.</b>
+      </div>
+
       <div class="meet-sec">
-        <h3>1. 현재 광고 진단</h3>
+        <h3>1. 광고 진단</h3>
         <ul>
-          <li>1~4월 데이터 기준 CTR 하락 → 소재 피로도 개선 필요</li>
-          <li>장바구니 매출 > 구매완료 매출 → 결제 단계 이탈 큼</li>
-          <li>ROAS 유지되나 신규 유입·전환 구조 재정비 필요</li>
+          <li>1~4월 CTR 하락 → 소재 피로도 개선</li>
+          <li>장바구니 매출 > 구매완료 → 결제 이탈 큼</li>
+          <li>ROAS 유지되나 신규 유입·전환 재정비 필요</li>
         </ul>
       </div>
+
       <div class="meet-sec">
-        <h3>2. 제안 운영 방향 (3단 퍼널)</h3>
+        <h3>2. 제안 (3단 퍼널)</h3>
         <ul>
-          <li>① 신규 유입 (논타겟/관심사) — 인지도 확보</li>
-          <li>② 장바구니/관심고객 리타겟팅 — 구매 전환 유도</li>
-          <li>③ 재구매·확장 — 연관·세트 상품 추가 구매</li>
-          <li>+ 애드부스트·쇼핑 프로모션·전환 배너·카탈로그 성과형 병행</li>
+          <li>① 신규 유입 (논타겟/관심사)</li>
+          <li>② 장바구니/관심 리타겟팅</li>
+          <li>③ 재구매·확장 (LTV)</li>
+          <li>+ 애드부스트·쇼핑·전환 배너·카탈로그 병행</li>
         </ul>
       </div>
+
       <div class="meet-sec">
-        <h3>3. 소재·메시지 전략</h3>
+        <h3>3. 소재·메시지</h3>
         <ul>
-          <li>퍼널별 맞춤 메시지(브랜딩·강점·할인·후기) 운영 필요</li>
-          <li>CTR 하락 원인 — 소재 부족·반복 사용 가능성</li>
-          <li>실사용 콘텐츠·인플루언서 영상·레시피 콘텐츠 적극 활용</li>
+          <li>퍼널별 맞춤 메시지 운영</li>
+          <li>CTR 하락 = 소재 부족·반복 사용</li>
+          <li>실사용·인플루언서·레시피 콘텐츠 활용</li>
         </ul>
       </div>
+
       <div class="meet-sec">
-        <h3>4. 자사 상황 공유</h3>
+        <h3>4. 자사 상황</h3>
         <ul>
-          <li>광고 체계·예산 편차 → 정형화 필요</li>
-          <li>광고 전담 인력 부족 → 외부 디테일 관리 필요</li>
-          <li>대표님 주간 단위 보고 중시 전달</li>
-          <li>듀오메이커·아블러·아블러 제로 SKU별 소구점 재정리 필요</li>
+          <li>광고 체계·예산 편차 정형화 필요</li>
+          <li>대표님 주간 단위 보고 중시</li>
+          <li>듀오·아블러·아블러제로 SKU 소구점 재정리</li>
         </ul>
       </div>
+
       <div class="meet-sec">
-        <h3>5. 상품·타겟 확장 아이디어</h3>
+        <h3>5. 확장 아이디어</h3>
         <ul>
-          <li>듀오메이커 — 위스키 외 커피·우유·막걸리·팥빙수·아이스크림 확장</li>
-          <li>아블러 제로 — 40~50대 여성 반응 양호 · 세척 편의성·직관성 강점</li>
-          <li>여성 타겟 확장 가능성 충분</li>
+          <li>듀오 → 커피·우유·막걸리·팥빙수 확장</li>
+          <li>아블러제로 → 40~50대 여성 반응↑</li>
+          <li>여성 타겟 확장 가능</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>6. 추가 논의</h3>
         <ul>
-          <li>유튜브 쇼핑·인플루언서·공동구매·라이브커머스 연계 검토</li>
-          <li>경쟁사·시장 포지셔닝 분석 요청</li>
-          <li>강민경·빠니보틀·전현무 자산 우회 활용 방안 검토</li>
+          <li>유튜브 쇼핑·인플·공구·라이브 연계</li>
+          <li>경쟁사·시장 포지셔닝 분석</li>
+          <li>강민경·빠니보틀·전현무 우회 활용</li>
         </ul>
+      </div>
+
+      <div class="actions-box">
+        <div class="at">7. 후속 액션</div>
+        ☑ 광고 계정 권한 전달 → 데이터 정밀 분석<br>
+        ☑ 4/24까지 1차 제안안 수령<br>
+        ☐ 광고 소재·콘텐츠 자산 정리 순차 전달<br>
+        ☐ 진행 결정 별도 판단
       </div>
     </div>
 
-    <div class="actions-box">
-      <div class="at">7. 후속 액션</div>
-      ☑ 금일 광고 계정 권한 전달 → 데이터 정밀 분석 요청<br>
-      ☑ 4/24 금요일까지 1차 제안안(예산·매체·집행 방향) 수령 예정<br>
-      ☐ 광고 소재·콘텐츠 자산 정리 후 순차 전달 예정<br>
-      ☐ 이 후 진행 결정 여부 판단 예정
-    </div>
-  </div>
+    <!-- ② EPROAD -->
+    <div class="meet-card eproad">
+      <span class="meet-order">② 4/24 (금) 11시</span>
+      <h2>이프로애드 🥇</h2>
+      <div class="when">김병현 대표 + 본부장 외</div>
 
-  <!-- ② EPROAD -->
-  <div class="meet-card eproad">
-    <div class="meet-head">
-      <h2>② 이프로애드(EPROAD) 광고대행사 미팅 요약 🥇</h2>
-      <div class="when">2026-04-24 (금) 11:00 · 김병현 대표 + 본부장 외</div>
-    </div>
-    <div class="verdict-box">
-      <b>미팅 총평</b> — 대표님 3대 조건을 3사 중 유일하게 모두 명확 충족. 25페이지 상세 제안서 + 자사몰 95% 의존 리스크·GA4 미설치·브랜드 키워드 과다 지출 즉석 진단. 네이버 플레이스 5개 광고 선제 추천. 박지현 자발 평: <i>"팀장님이 신뢰 간다. 꼼꼼하게 잘해줄 것 같다."</i>
-    </div>
+      <div class="verdict-box">
+        <b>미팅 총평</b> — 대표님 3대 조건 유일 명확 충족. 25P 제안서 + 자사몰 95% 의존·GA4 미설치·브키워드 과다 즉석 진단. 박지현 평: <i>"신뢰 간다. 꼼꼼하게 잘해줄 것 같다."</i>
+      </div>
 
-    <div class="meet-grid">
       <div class="meet-sec">
         <h3>1. 회사 개요</h3>
         <ul>
-          <li>2005년 설립 · 20년차 · 대표 김병현</li>
-          <li>직원 45명(2026.01) · 5개 본부</li>
-          <li>광고사업본부 1·2·3팀 + 콘텐츠제작본부(디자인·영상)</li>
+          <li>2005년 · 20년차 · 대표 김병현</li>
+          <li>45명 · 5본부</li>
+          <li>광고사업 1·2·3팀 + 콘텐츠제작본부</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>2. 강점·레퍼런스 20+</h3>
         <ul>
-          <li>아모레·카멜·롯데카드·케이뱅크·이케아·VISA·엘빈즈·스메그·필립스·KOTRA·KB생명·아가방 외</li>
+          <li>아모레·카멜·롯데카드·이케아·VISA</li>
+          <li>엘빈즈·스메그·필립스·KOTRA·KB생명</li>
           <li>카멜 SA 6개월 ROAS 400%↑</li>
           <li>엘빈즈 가입 CPA → LTV 전환 성공</li>
-          <li>VISA 글로벌 옥외·팝업 통합</li>
         </ul>
       </div>
+
       <div class="meet-sec">
-        <h3>3. 미팅 중 즉석 진단 (자발 적극성)</h3>
+        <h3>3. 즉석 진단</h3>
         <ul>
-          <li>자사몰 95% 의존 = 리스크 → 채널 다변화 필요</li>
-          <li>GA4 미설치 → 통합 지표 관리 즉시 셋업 필요</li>
-          <li>브랜드 키워드 과다 지출 → 캠페인 분리 재세팅</li>
-          <li>네이버 <b>플레이스 5개 광고</b>(강남 키오스크) 선제 추천</li>
-          <li>강남권·40~50대 여성 타겟 즉석 이해</li>
+          <li>자사몰 95% 의존 = 리스크</li>
+          <li>GA4 즉시 셋업 필요</li>
+          <li>브랜드 키워드 과다 → 캠페인 분리</li>
+          <li>플레이스 5개 광고(강남 키오스크) 선제 추천</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>4. 비용 조건</h3>
         <ul>
-          <li>네이버 수수료 0% · 구글·메타 각 15%</li>
-          <li>이미지 무상 + 영상 2회 무상 수정 · 쇼츠 건별</li>
+          <li>네이버 0% / 구글·메타 각 15%</li>
+          <li>이미지 무상 + 영상 2회 무상 수정</li>
           <li>GA4·GTM·에이스카운터 무상</li>
-          <li>주간+월간+비정기 리포트 (코멘트·이슈·액션 첨부)</li>
+          <li>주+월+비정기 리포트 (코멘트·액션 첨부)</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>5. 투입 10명 (과장급 6명 고정)</h3>
         <ul>
           <li>본부장 1(10년) + 팀장 3(10·11·4년)</li>
-          <li>과장 2(12·2년) + 대리 3(4·5·5년) + 주임 1(3년)</li>
-          <li>김** 과장(디자인 12년) + 오** 팀장(영상 퀄리티)</li>
+          <li>과장 2(12·2년) + 대리 3(4·5·5년) + 주임 1</li>
+          <li>김** 과장(디자인 12년) + 오** 팀장(영상)</li>
         </ul>
       </div>
+
       <div class="meet-sec">
-        <h3>6. 콘텐츠 제작 역량</h3>
+        <h3>6. 콘텐츠 제작</h3>
         <ul>
-          <li>콘텐츠제작본부 자체 (디자인+영상 제작팀)</li>
-          <li>엘빈즈 PDF 캐릭터 → 움직이는 캐릭터 생산</li>
-          <li>소재 컨셉 재설정 — CTR 0.9% → 2.1% 개선</li>
+          <li>콘텐츠제작본부 자체 (디자인+영상)</li>
+          <li>엘빈즈 PDF → 움직이는 캐릭터 제작</li>
+          <li>CTR 0.9% → 2.1% 개선 사례</li>
         </ul>
+      </div>
+
+      <div class="actions-box">
+        <div class="at">7. 후속 액션 (모두 수신 완료)</div>
+        ☑ 회사소개서 PDF (28MB)<br>
+        ☑ 운영관리방안 (4.5MB · 4/23)<br>
+        ☑ 이미지·숏폼 PPTX (76MB)<br>
+        ☑ 숏폼 zip (48MB)<br>
+        → 강민경·빠니보틀 우회 활용 검토 중<br>
+        → 2주 진단 후 본격 운영
       </div>
     </div>
 
-    <div class="actions-box">
-      <div class="at">7. 후속 액션 (모두 수신 완료)</div>
-      ☑ 회사소개서 PDF (28MB) · ☑ 운영관리방안 소개자료 (4.5MB · 4/23)<br>
-      ☑ 이미지·숏폼 제작 레퍼런스 PPTX (76MB) · ☑ 숏폼 레퍼런스 zip (48MB)<br>
-      → 강민경·빠니보틀 영상 우회 활용안 검토 진행 중<br>
-      → 기존 캠페인 2주 진단 → 세팅 재정비 → 본격 운영 단계 검토
-    </div>
-  </div>
+    <!-- ③ MAZE -->
+    <div class="meet-card maze">
+      <span class="meet-order">③ 4/24 (금) 14시</span>
+      <h2>마제스타지 🥈</h2>
+      <div class="when">팀장 + 우재호 주임</div>
 
-  <!-- ③ MAZE -->
-  <div class="meet-card maze">
-    <div class="meet-head">
-      <h2>③ 마제스타지(MAZE) 광고대행사 미팅 요약 🥈</h2>
-      <div class="when">2026-04-24 (금) 14:00 · 팀장 + 우재호 주임</div>
-    </div>
-    <div class="verdict-box">
-      <b>미팅 총평</b> — 미팅 중 제품 직접 체험하며 <i>"이거 사야 될 것 같다"</i> 자발 반응 + 리뷰 100+ 선행 조사. 풀스택 IMC + OOH 10년+ + "같이 크고 싶다" 상생 표현. <b>보완:</b> 커머스·소비재 전용 레퍼런스 부족(지자체·공공 중심), 우재호 주임 직급·팀장 투입률 미확정.
-    </div>
+      <div class="verdict-box">
+        <b>미팅 총평</b> — 제품 직접 체험 <i>"이거 사야 될 것 같다"</i> + 리뷰 100+ 선행. 풀스택 IMC + OOH 10년+ + "같이 크고 싶다" 상생. <b>보완:</b> 커머스 레퍼런스·우재호 직급 미확정.
+      </div>
 
-    <div class="meet-grid">
       <div class="meet-sec">
         <h3>1. 회사 개요</h3>
         <ul>
-          <li>2005년 설립(20년차) · 직원 30~40명</li>
-          <li>5개 본부 — 광고사업·컨텐츠미디어·캠페인·프로덕션·스튜디오</li>
-          <li>차별점 — 팀 단위 관리 + 백업 담당자 구조</li>
+          <li>2005년(20년차) · 30~40명</li>
+          <li>5개 본부 (광고·컨텐츠미디어·캠페인·프로덕션·스튜디오)</li>
+          <li>팀 단위 관리 + 백업 담당자 구조</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>2. 강점·레퍼런스</h3>
         <ul>
-          <li>카멜그룹·엘빈즈·비자카드 글로벌 옥외·팝업</li>
-          <li>유안타증권 1년 전담 (우재호 주임)</li>
-          <li>OOH 10년+ — 아파트·영화관·편의점·키오스크·서울/용산역</li>
-          <li>"한 번도 사고 난 적 없음" · PM 4~5명 전담 · 재대행 금지</li>
+          <li>카멜·엘빈즈·VISA 글로벌 옥외</li>
+          <li>유안타증권 1년 전담 (우재호)</li>
+          <li>OOH 10년+ — 아파트·영화관·서울/용산역</li>
+          <li>"한 번도 사고 난 적 없음" · PM 4~5명 전담</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>3. 비용 조건</h3>
         <ul>
           <li>네이버 0% · 구글·메타 각 15%</li>
           <li>이미지 무상 · 쇼폼 건별</li>
-          <li><b>월 3,000 고정 + 이벤트 최대 5,000 탄력</b></li>
-          <li>월 단위 계약 / 최소 3개월 권장</li>
-          <li>강민경·빠니보틀·전현무 라이선스 우회 30~50%</li>
+          <li><b>월 3,000 + 이벤트 5,000 탄력</b></li>
+          <li>월 단위 / 최소 3개월 권장</li>
+          <li>강민경·빠니보틀·전현무 우회 30~50%</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>4. 쥬얼아이스 요청</h3>
         <ul>
-          <li>매체 1차 — 네이버+구글+메타 (카카오 제외)</li>
+          <li>매체 1차 — 네이버+구글+메타 (카카오 X)</li>
           <li>쇼폼 영상 기획·제작</li>
-          <li>강민경·빠니보틀 자발 영상 활용 방안 → 링크 전달 예정</li>
-          <li>중소급 유튜버 다수 섭외 (유튜브 쇼핑 연계)</li>
-          <li>글로벌 펀딩(10월 미국·대만·베트남) 연계 가능성 확인</li>
+          <li>강민경·빠니보틀 자발 영상 활용 → 링크 전달 예정</li>
+          <li>중소급 유튜버 다수 섭외</li>
+          <li>글로벌 펀딩(10월 미·대만·베) 연계</li>
         </ul>
       </div>
+
       <div class="meet-sec">
         <h3>5. 신규 제안 (수용 검토)</h3>
         <ul>
           <li>네이버 플레이스 5대 광고 (강남 키오스크)</li>
           <li>GA4 통합 지표 관리</li>
-          <li>여름(6~9월) OOH 집중 + 상하반기 연예인 PPL</li>
+          <li>여름(6~9월) OOH 집중 + PPL</li>
           <li>브랜딩 IMC 영상 제작 (선제 제안)</li>
         </ul>
       </div>
+
       <div class="meet-sec">
-        <h3>6. 평가 — 대표님 보고 포인트</h3>
+        <h3>6. 평가 포인트</h3>
         <ul>
           <li>담당자 교체 없음 ✅ 팀장 직접 컨펌</li>
           <li>레퍼런스 ✅ 카멜·엘빈즈 (커머스 추가 필요)</li>
-          <li>내부 제작 ✅ 프로덕션+스튜디오 본부</li>
-          <li>제품 가치 이해 ✅ 직접 체험 + 리뷰 100+ 선행</li>
+          <li>내부 제작 ✅ 프로덕션+스튜디오</li>
+          <li>제품 이해 ✅ 직접 체험 + 리뷰 100+ 선행</li>
         </ul>
+      </div>
+
+      <div class="actions-box">
+        <div class="at">7. 후속 액션</div>
+        ☑ 영상·디자인 레퍼런스 정리 (당일)<br>
+        ☑ 쇼폼 제작 견적<br>
+        ☑ 오늘 사용 제안서 공유<br>
+        ☐ 해외 마케팅·엔터 협찬 회신<br>
+        → 강민경·빠니보틀 영상 링크 전달 예정<br>
+        → "시각 퀄리티 vs 운영 구조" 판단
       </div>
     </div>
 
-    <div class="actions-box">
-      <div class="at">7. 후속 액션</div>
-      ☑ 영상·디자인 레퍼런스 정리 (당일 송부) · ☑ 쇼폼 제작 견적<br>
-      ☑ 오늘 사용 제안서 파일 공유 · ☐ 해외 마케팅·엔터 협찬 가능 범위 회신<br>
-      → 마제스타지에 강민경·빠니보틀 영상 링크 전달 예정<br>
-      → 판단 프레임 — "시각 퀄리티 우선(EPROAD) vs 운영 구조 우선(MAZE)"
-    </div>
   </div>
-
 </div>
 
 </body>
