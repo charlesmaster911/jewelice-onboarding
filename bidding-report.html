@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>쥬얼아이스 광고 3사 미팅록 보고 (대표님 보고용 · 1page)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #F3F4F6; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1F2937;
+    line-height: 1.55;
+    padding: 24px 12px;
+  }
+
+  .toolbar {
+    max-width: 940px; margin: 0 auto 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: #6B7280;
+  }
+  .toolbar a { color: #7C3AED; text-decoration: none; font-weight: 600; }
+  .toolbar button {
+    background: #7C3AED; color: white; border: 0; padding: 8px 16px;
+    border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer;
+  }
+  .toolbar button:hover { background: #5B21B6; }
+
+  .page {
+    width: 210mm; min-height: 297mm; max-width: 100%;
+    margin: 0 auto;
+    background: white;
+    padding: 14mm 14mm 12mm;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    page-break-after: always;
+  }
+
+  .header {
+    border-bottom: 3px solid #7C3AED;
+    padding-bottom: 8px; margin-bottom: 12px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .header h1 {
+    font-size: 18px; font-weight: 900; letter-spacing: -0.4px;
+    background: linear-gradient(90deg, #7C3AED, #FBBF24);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header .meta { font-size: 10.5px; color: #6B7280; text-align: right; }
+  .header .meta strong { color: #1F2937; }
+
+  .summary {
+    background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+    border-left: 4px solid #7C3AED;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 11.5px; line-height: 1.7;
+  }
+  .summary strong { color: #5B21B6; }
+  .summary .verdict { font-size: 12.5px; font-weight: 800; color: #7C2D12; margin-bottom: 4px; }
+
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+  }
+
+  .card {
+    border: 1.5px solid; border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 10.2px; line-height: 1.55;
+    display: flex; flex-direction: column;
+  }
+  .card.ampm { border-color: #F59E0B; background: linear-gradient(180deg, #FEF3C7 0%, #FFFFFF 30%); }
+  .card.eproad { border-color: #EA580C; background: linear-gradient(180deg, #FFEDD5 0%, #FFFFFF 30%); }
+  .card.maze { border-color: #DC2626; background: linear-gradient(180deg, #FEE2E2 0%, #FFFFFF 30%); }
+
+  .card .order {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    font-size: 9px; font-weight: 700; color: white; margin-bottom: 4px;
+  }
+  .ampm .order { background: #F59E0B; }
+  .eproad .order { background: #EA580C; }
+  .maze .order { background: #DC2626; }
+
+  .card h2 { font-size: 13px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 2px; }
+  .ampm h2 { color: #78350F; }
+  .eproad h2 { color: #7C2D12; }
+  .maze h2 { color: #991B1B; }
+  .card .when { font-size: 9.5px; color: #6B7280; margin-bottom: 6px; }
+
+  .badge-row { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+  .badge {
+    font-size: 8.5px; font-weight: 700; padding: 1px 6px; border-radius: 8px;
+    background: white; border: 1px solid;
+  }
+  .ampm .badge { color: #78350F; border-color: #F59E0B; }
+  .eproad .badge { color: #7C2D12; border-color: #EA580C; }
+  .maze .badge { color: #991B1B; border-color: #DC2626; }
+
+  .pverdict {
+    background: white; border-radius: 6px; padding: 6px 8px;
+    font-size: 9.8px; line-height: 1.55; margin-bottom: 6px;
+    border-left: 3px solid;
+  }
+  .ampm .pverdict { border-color: #F59E0B; }
+  .eproad .pverdict { border-color: #EA580C; }
+  .maze .pverdict { border-color: #DC2626; }
+  .pverdict b { font-size: 10px; }
+
+  .sec-title {
+    font-size: 9.5px; font-weight: 800; letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-top: 5px; margin-bottom: 2px;
+  }
+  .ampm .sec-title { color: #92400E; }
+  .eproad .sec-title { color: #9A3412; }
+  .maze .sec-title { color: #B91C1C; }
+
+  .card ul { margin-left: 14px; margin-bottom: 4px; }
+  .card li { margin-bottom: 1px; font-size: 9.8px; line-height: 1.5; }
+
+  .actions {
+    margin-top: auto;
+    background: rgba(255,255,255,0.7); border-radius: 6px; padding: 6px 8px;
+    font-size: 9.5px; border-top: 2px solid;
+  }
+  .ampm .actions { border-color: #F59E0B; }
+  .eproad .actions { border-color: #EA580C; }
+  .maze .actions { border-color: #DC2626; }
+  .actions .at { font-size: 8.8px; font-weight: 800; margin-bottom: 2px; }
+  .ampm .actions .at { color: #92400E; }
+  .eproad .actions .at { color: #9A3412; }
+  .maze .actions .at { color: #B91C1C; }
+
+  .footer {
+    margin-top: 10px;
+    background: #1F2937; color: #F3F4F6;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 10.5px; line-height: 1.65;
+  }
+  .footer strong { color: #FBBF24; }
+  .footer .label {
+    display: inline-block; background: #FBBF24; color: #1F2937;
+    padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 800; margin-right: 6px;
+  }
+
+  .crit-table { width: 100%; border-collapse: collapse; font-size: 9.5px; margin-top: 4px; }
+  .crit-table th { background: #374151; color: white; padding: 3px 6px; font-weight: 700; }
+  .crit-table td { padding: 3px 6px; border: 1px solid #4B5563; background: white; color: #1F2937; }
+  .crit-table .ok { color: #16A34A; font-weight: 700; }
+  .crit-table .partial { color: #EA580C; font-weight: 700; }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .toolbar { display: none; }
+    .page { box-shadow: none; padding: 12mm; }
+  }
+  @page { size: A4; margin: 0; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span><a href="bidding.html">← 비딩 비교 풀버전</a> · 한 장 보고용 · 대표님 보고</span>
+  <button onclick="window.print()">🖨 인쇄 / PDF 저장</button>
+</div>
+
+<div class="page">
+
+  <div class="header">
+    <h1>광고 에이전시 3사 미팅록 — 대표님 보고용 (1page)</h1>
+    <div class="meta">
+      작성 <strong>박지현 팀장</strong> · 2026-04-30<br>
+      한국 날짜 순 (4/23 → 4/24 11시 → 4/24 14시)
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="verdict">🏆 종합 추천: 시나리오 A — 이프로애드(EPROAD) 단독 / 또는 시나리오 C — EPROAD + MAZE 듀얼</div>
+    <strong>EPROAD 🥇 20/20</strong> 대표님 3대 조건(레퍼런스·과장급 고정·재대행 금지) 유일 명확 충족 · 투입 10명 서면 명시 · 카멜그룹 ROAS 400%↑·엘빈즈 LTV 전환 사례 ·
+    <strong>MAZE 🥈 20/20</strong> 제품 직접 체험·OOH 10년+·월 3,000 탄력 운용 · 단 커머스 레퍼런스 추가 증빙 필요 ·
+    <strong>AMPM 🥉 16/20</strong> 퍼널 3단 구조 진단 정확하나 소재 분업·집중도 분산 우려 → 분업 병행 서브 후보.
+  </div>
+
+  <div class="grid">
+
+    <!-- ① AMPM (4/23) -->
+    <div class="card ampm">
+      <span class="order">① 한국 날짜 1번째</span>
+      <h2>AMPM글로벌 🥉</h2>
+      <div class="when">2026-04-23 (목) · 박지현 단독 참석</div>
+
+      <div class="badge-row">
+        <span class="badge">매출 445억 (E:500억)</span>
+        <span class="badge">네·카 공식대행사</span>
+        <span class="badge">메타 KPP</span>
+      </div>
+
+      <div class="pverdict">
+        <b>미팅 총평</b> — 퍼널 구조·리타겟·소재 개선·보고 체계는 체계적 설명. CTR 하락·장바구니 이탈·구매 전환 저하 진단 방향 적정. <b>다만 실제 운영 역량과 제안 신뢰도는 별도 검증 필수.</b>
+      </div>
+
+      <div class="sec-title">1. 광고 진단</div>
+      <ul>
+        <li>1~4월 CTR 하락 → 소재 피로도 개선 필요</li>
+        <li>장바구니 매출 > 구매완료 → 결제 단계 이탈 큼</li>
+        <li>ROAS 유지되나 신규 유입·전환 구조 재정비 필요</li>
+      </ul>
+
+      <div class="sec-title">2. 제안 (3단 퍼널)</div>
+      <ul>
+        <li>① 신규 유입 (논타겟/관심사)</li>
+        <li>② 장바구니/관심 리타겟팅</li>
+        <li>③ 재구매·확장 캠페인 (LTV)</li>
+        <li>+ 애드부스트·쇼핑 프로모션·전환 배너·카탈로그 성과형 병행</li>
+      </ul>
+
+      <div class="sec-title">3. 자사 상황·확장 아이디어</div>
+      <ul>
+        <li>대표님 주간 단위 보고 중시 전달</li>
+        <li>듀오메이커·아블러·아블러 제로 SKU별 소구점 재정리 필요</li>
+        <li>듀오메이커: 커피·우유·막걸리·팥빙수 확장</li>
+        <li>아블러 제로: 40~50대 여성 반응 양호</li>
+        <li>강민경·빠니보틀·전현무 자산 우회 활용 검토</li>
+      </ul>
+
+      <div class="actions">
+        <div class="at">후속 액션</div>
+        ☑ 광고 계정 권한 전달 → 데이터 정밀 분석<br>
+        ☑ 4/24까지 1차 제안안(예산·매체·집행 방향) 수령<br>
+        ☐ 광고 소재·콘텐츠 자산 정리 후 순차 전달<br>
+        ☐ 진행 결정 여부 별도 판단
+      </div>
+    </div>
+
+    <!-- ② EPROAD (4/24 11시) -->
+    <div class="card eproad">
+      <span class="order">② 한국 날짜 2번째</span>
+      <h2>이프로애드 (EPROAD) 🥇</h2>
+      <div class="when">2026-04-24 (금) 11:00 · 김병현 대표 + 본부장 외</div>
+
+      <div class="badge-row">
+        <span class="badge">2005년·20년차</span>
+        <span class="badge">45명·5본부</span>
+        <span class="badge">투입 10명 서면</span>
+        <span class="badge">레퍼런스 20+</span>
+      </div>
+
+      <div class="pverdict">
+        <b>미팅 총평</b> — 대표님 3대 조건 유일 명확 충족. 25P 상세 제안서 + 자사몰 95% 의존·GA4 미설치·브랜드 키워드 과다 지출 즉석 진단 + 플레이스 5개 광고 선제 추천.<br>
+        박지현 자발 평: <i>"팀장님이 신뢰 간다. 꼼꼼하게 잘해줄 것 같다."</i>
+      </div>
+
+      <div class="sec-title">1. 강점·레퍼런스 20+</div>
+      <ul>
+        <li>아모레·카멜·롯데카드·케이뱅크·이케아·VISA·엘빈즈·스메그·KOTRA·필립스·KB생명 외</li>
+        <li>카멜 SA 6개월 ROAS 400%↑</li>
+        <li>엘빈즈 가입 CPA → LTV 전환 성공</li>
+      </ul>
+
+      <div class="sec-title">2. 비용 조건</div>
+      <ul>
+        <li>네이버 0% / 구글·메타 각 15%</li>
+        <li>이미지 무상 + 영상 2회 무상 수정</li>
+        <li>GA4·GTM·에이스카운터 무상</li>
+        <li>주간+월간+비정기 리포트 (코멘트·이슈·액션 첨부)</li>
+      </ul>
+
+      <div class="sec-title">3. 투입 10명 (과장급 6명 고정)</div>
+      <ul>
+        <li>본부장 1(10년) + 팀장 3(10·11·4년)</li>
+        <li>과장 2(12·2년) + 대리 3(4·5·5년) + 주임 1</li>
+        <li>김** 과장(디자인 12년) + 오** 팀장(영상)</li>
+      </ul>
+
+      <div class="sec-title">4. 즉석 진단</div>
+      <ul>
+        <li>자사몰 95% 의존 → 채널 다변화</li>
+        <li>플레이스 5개 광고 (강남 키오스크) 추천</li>
+        <li>강남권·40~50대 여성 타겟 정확 이해</li>
+      </ul>
+
+      <div class="actions">
+        <div class="at">후속 액션 (모두 수신 완료)</div>
+        ☑ 회사소개서 PDF (28MB)<br>
+        ☑ 운영관리방안 소개자료 (4.5MB · 4/23)<br>
+        ☑ 이미지·숏폼 레퍼런스 PPTX (76MB)<br>
+        ☑ 숏폼 레퍼런스 zip (48MB)<br>
+        → 기존 캠페인 2주 진단 후 본격 운영 검토
+      </div>
+    </div>
+
+    <!-- ③ MAZE (4/24 14시) -->
+    <div class="card maze">
+      <span class="order">③ 한국 날짜 3번째</span>
+      <h2>마제스타지 (MAZE) 🥈</h2>
+      <div class="when">2026-04-24 (금) 14:00 · 팀장 + 우재호 주임</div>
+
+      <div class="badge-row">
+        <span class="badge">2005년·30~40명</span>
+        <span class="badge">5본부 자체</span>
+        <span class="badge">OOH 10년+</span>
+        <span class="badge">월 3,000+5,000</span>
+      </div>
+
+      <div class="pverdict">
+        <b>미팅 총평</b> — 제품 직접 체험 <i>"이거 사야 될 것 같다"</i> 자발 반응 + 리뷰 100+ 선행 조사. 풀스택 IMC + OOH 10년+ + "같이 크고 싶다" 상생.<br>
+        <b>보완:</b> 커머스·소비재 전용 레퍼런스 부족(지자체·공공 중심), 우재호 주임 직급·팀장 투입률 미확정.
+      </div>
+
+      <div class="sec-title">1. 강점·레퍼런스</div>
+      <ul>
+        <li>카멜·엘빈즈·VISA 글로벌 옥외·팝업</li>
+        <li>유안타증권 1년 전담 (우재호 주임)</li>
+        <li>OOH 10년+ — 아파트·영화관·편의점·키오스크·서울/용산역</li>
+        <li>"한 번도 사고 난 적 없음" · PM 4~5명 전담 · 재대행 금지</li>
+      </ul>
+
+      <div class="sec-title">2. 비용 조건</div>
+      <ul>
+        <li>네이버 0% / 구글·메타 각 15%</li>
+        <li>이미지 무상 · 쇼폼 건별</li>
+        <li><b>월 3,000 고정 + 이벤트 최대 5,000 탄력</b></li>
+        <li>월 단위 계약 / 최소 3개월 권장</li>
+        <li>강민경·빠니보틀·전현무 라이선스 우회 30~50%</li>
+      </ul>
+
+      <div class="sec-title">3. 신규 제안 (수용 검토)</div>
+      <ul>
+        <li>네이버 플레이스 5대 광고 (강남 키오스크)</li>
+        <li>GA4 통합 지표 관리</li>
+        <li>여름(6~9월) OOH 집중 + 상하반기 연예인 PPL</li>
+        <li>브랜딩 IMC 영상 제작 (선제 제안)</li>
+      </ul>
+
+      <div class="actions">
+        <div class="at">후속 액션</div>
+        ☑ 영상·디자인 레퍼런스 정리 (당일 송부)<br>
+        ☑ 쇼폼 제작 견적<br>
+        ☑ 오늘 사용 제안서 파일 공유<br>
+        ☐ 해외 마케팅·엔터 협찬 가능 범위 회신<br>
+        → 강민경·빠니보틀 영상 링크 전달 예정
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="label">대표님 3대 조건</span>
+    <strong>① 레퍼런스 증빙</strong> EPROAD ✅ 20+ / MAZE 🟡 추가 필요 / AMPM 🟡 유사 카테고리 ·
+    <strong>② 과장급 고정</strong> EPROAD ✅ 6명 / MAZE 🟡 직급 재확인 / AMPM 🟡 미확인 ·
+    <strong>③ 재대행 금지</strong> EPROAD 🟡 라이브 촬영만 외주 / MAZE ✅ 원칙 금지 / AMPM 🟡 미확인<br><br>
+
+    <table class="crit-table">
+      <tr><th style="width:24%;">기준</th><th style="width:25%;">EPROAD 🥇</th><th style="width:25%;">MAZE 🥈</th><th style="width:26%;">AMPM 🥉</th></tr>
+      <tr><td>박지현 5대 기준 종합</td><td class="ok">20/20</td><td class="ok">20/20</td><td class="partial">16/20</td></tr>
+      <tr><td>대표님 3대 조건</td><td class="ok">유일 모두 ✅</td><td class="partial">2건 보완 필요</td><td class="partial">3건 미확인</td></tr>
+      <tr><td>핵심 강점</td><td>퍼포먼스·리포트·LTV 설계</td><td>제품 체험·OOH·풀스택 IMC</td><td>퍼포먼스 운영·퍼널 최적화</td></tr>
+      <tr><td>판단 프레임</td><td colspan="2"><b>"시각 퀄리티 우선(EPROAD) vs 운영 구조 우선(MAZE)"</b></td><td>분업 병행 서브 후보</td></tr>
+    </table>
+
+    <div style="margin-top:8px; font-size:10px;">
+      <span class="label">최종 추천</span>
+      시나리오 <strong>A</strong> EPROAD 단독 (안정적) · 시나리오 <strong>C</strong> EPROAD+MAZE 듀얼 (예산 여유 시 — EPROAD 퍼포먼스·리포트·이미지 + MAZE OOH·브랜딩·감성 결합)
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
